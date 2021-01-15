@@ -4,8 +4,6 @@ const userImageLabelTable = require("../models/userImageLabel");
 const { Client } = require('pg');
 require('dotenv').config();
 
-
-
 const client = new Client({
     user : "postgres",
     password : "utsav",
@@ -13,6 +11,8 @@ const client = new Client({
     port : 5432,
     database : "ImgCat"
 });
+
+
 
 async function execute(){
     try{
@@ -73,5 +73,6 @@ async function initDBAndTables(){
 
 module.exports = {
     initDBAndTables : initDBAndTables,
-    execute : execute
+    execute : execute,
+    client : client
 }
