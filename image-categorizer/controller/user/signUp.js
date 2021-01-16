@@ -27,13 +27,14 @@ class SignUp{
                 const storedOTP = await this.userUtility.getValue(email);
                 if(storedOTP !== null){
                     if(storedOTP === otp){
-                        const hash = this.userUtility.hash(password);
+                        const hash = await this.userUtility.hash(password);
                         await this.userRepo.createUser(username,email,hash);
                         const userData = await this.userRepo.getUserDetailByEmail(email);
+                        const userInfo = userData.rows[0]; 
                         return this.helper.writeResponse(null,{
                             message: "The user account and platform has been signed/set up successfully!",
                             status : true,
-                            userData
+                            userInfo
                         },res);
                     }
                     else{

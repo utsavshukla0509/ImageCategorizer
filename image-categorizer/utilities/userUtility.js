@@ -42,11 +42,10 @@ class UserUtility{
 
 
     async createOTP(email,transporter){
-        
         var otp = otpGenerator.generate(6, { alphabets : false,specialChars : false,upperCase : false });
 
         // set otp in redis (with email as key) with expiration time(5 min)
-        redis.set(email,otp,'PX',300000);
+        this.redisClient.set(email,otp,'PX',300000);
 
         //Before sending a mail given link option will be TRUE 
         //of those gmail account by which you send a message

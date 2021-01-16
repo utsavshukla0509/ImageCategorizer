@@ -18,7 +18,7 @@ constructor(postgresClient) {
     }
 
     async createUser(username,email,password){
-        const query = `INSERT INTO public.userinfo ("username","email","password") VALUES (${username},${email},${password});`;
+        const query = `INSERT INTO public.userinfo ("username","email","password") VALUES ('${username}','${email}','${password}');`;
         return this.postgresClient.query(query);
     }
 

@@ -51,17 +51,14 @@ class Login extends React.Component {
     return errors;
   };
   handleSubmit = (e) => {
-    // console.log(this.state.data);
     e.preventDefault();
     const errors = this.validate();
     if (_.isEmpty(errors)) this.props.signIn(this.state.data);
   };
 
   saveUserDetais(user, loggedIn) {
-     console.log(user);
-    // loggedIn = true;
     if (loggedIn) {
-     localStorage.setItem("name",user.id)
+     localStorage.setItem("name",user.userInfo.userid)
       localStorage.setItem("loggedIn", true);
     }
   }
@@ -70,9 +67,7 @@ class Login extends React.Component {
     const { data, errors } = this.state;
     const { email, password } = data;
     const { authMessage, loggedIn, userData } = this.props;
-    console.log(userData);
     if (loggedIn) this.props.history.push("/dashboard");
-    console.log("logged", loggedIn);
     return (
       <div className="bg-image-login ">
         <div className=" d-flex h-100 justify-content-center align-items-center">
@@ -131,7 +126,7 @@ class Login extends React.Component {
                       </div>
 
                       {authMessage ? (
-                        <p className="bg-info text-white"> {authMessage}</p>
+                        <p className="" style = {{color : "blue"}}> {authMessage}</p>
                       ) : (
                         <> </>
                       )}

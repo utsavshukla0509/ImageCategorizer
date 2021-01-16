@@ -1,9 +1,8 @@
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
-// const init = require("./models/index");
-const  dotenv = require('dotenv');
-dotenv.config();
+const init = require("./models/index");
+require('dotenv').config();
 const container = require("./di");
 
 

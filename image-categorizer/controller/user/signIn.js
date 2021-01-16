@@ -10,6 +10,7 @@ class SignIn{
 
     async handleRequest(req, res){
         try{
+
             const { email,password } = req.body;
             if(!email || !password) {
                 return this.helper.writeResponse({msg : "missing email or password field" ,code : 404},null,res);
@@ -21,12 +22,17 @@ class SignIn{
             else{
                 const result = await this.userUtility.comparePassword(password,userData.rows[0].password);
                 if(result){
-                    let data = {};
-                    data.userid = userData[0].rows.userid;
-                    data.username = userData[0].rows.username;
-                    data.email = userData[0].rows.email;
-                    const token = await this.userUtility.generateToken(data);   
-                    return this.helper.writeResponse(null,{msg: "Authentication has been successful",token : token},res);                
+                    let userInfo = {};
+                    userInfo.userid = userData.rows[0].userid;
+                    userInfo.username = userData.rows[0].username;
+                    userInfo.email = userData.rows[0].email;
+                    const token = await this.userUtility.generateToken(userInfo);   
+                    return this.helper.writeResponse(null,{
+                        msg: "Authentication has been successful",
+                        status : true,
+                        token : token,
+                        userInfo
+                    },res);                
                 }
                 else{
                     return this.helper.writeResponse({msg : "Incorrect Email or Password!" ,code : 404},{status : false},res);

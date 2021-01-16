@@ -55,7 +55,6 @@ class RegisterForm extends React.Component {
 
   handleVerify = (e) => {
     e.preventDefault();
-    // console.log(this.state.data,"verfiy");
 
     if (
       this.state.data.username !== "" &&
@@ -84,15 +83,13 @@ class RegisterForm extends React.Component {
     if (authMessage !== "" && authMessage !== undefined) {
       return;
     }
-    // console.log("hiiii",user.userData);
-    // console.log(user);
-    if (user.userData === undefined) {
+    if (user.userInfo === undefined) {
       return;
     }
     if (loggedIn) {
       localStorage.setItem("loggedIn", true);
       if (localStorage.getItem("loggedIn") === "true") {
-        localStorage.setItem("name", user.userData._id);
+        localStorage.setItem("name", user.userInfo.userid);
       }
     }
   }
@@ -102,7 +99,6 @@ class RegisterForm extends React.Component {
       this.setState({ isVerify: true });
     }
     const { authMessage, userData, loggedIn } = this.props;
-    // console.log(loggedIn);
     const { errors, authError } = this.state;
     const { username, email, password, otp } = this.state.data;
     if (loggedIn) this.props.history.push("/dashboard");
@@ -226,7 +222,7 @@ class RegisterForm extends React.Component {
                           )}
 
                           {authMessage ? (
-                            <p className="bg-info text-white"> {authMessage}</p>
+                            <p className="" style = {{color: "blue"}}> {authMessage}</p>
                           ) : (
                             <> </>
                           )}
