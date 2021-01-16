@@ -16,9 +16,9 @@ import {
     return async (dispatch) => {
       try {
         // console.log(credentials);
-        const result = await Axios.post("/api/users/login", credentials);
+        const result = await Axios.post("/user/login", credentials);
         // console.log(result.data);
-        dispatch({ type: LOGIN_SUCCESS, payload: result.data});
+        dispatch({ type: LOGIN_SUCCESS, payload: result});
       } catch (error) {
         dispatch({ type: LOGIN_ERROR, error });
       }
@@ -30,9 +30,9 @@ import {
       try {
         // console.log("credentials");
         // console.log(credentials); 
-        const result = await Axios.post("/api/users/signupandverify", credentials);
-        // console.log("helle");
-        // console.log(result);
+        const result = await Axios.post("/user/signup", credentials);
+        console.log("helle");
+        console.log(result);
         dispatch({ type: SIGNUP_SUCCESS, payload: result.data});
       } catch (error) {
         dispatch({ type: SIGNUP_ERROR, error });
@@ -51,9 +51,9 @@ export const getOTP = (email) => {
   return async (dispatch) => {
     try {
       // console.log(email);
-      const result = await Axios.post("/api/users/getotp",{"email" : email});
-      // console.log("getawait otp");
-      // console.log(result.data); 
+      const result = await Axios.post("/user/generateotp",{"email" : email});
+      console.log("getawait otp");
+      console.log(result.data); 
       dispatch({ type: GET_OTP_SUCCESS, payload: result.data });
     } catch (error) {
       dispatch({ type: GET_OTP_ERROR, error });
