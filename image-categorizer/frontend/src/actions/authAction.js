@@ -16,10 +16,11 @@ import {
     return async (dispatch) => {
       try {
         // console.log(credentials);
-        const result = await Axios.post("/user/login", credentials);
-        // console.log(result.data);
-        dispatch({ type: LOGIN_SUCCESS, payload: result});
+        const result = await Axios.post("/user/signin", credentials);
+        // console.log(result);
+        dispatch({ type: LOGIN_SUCCESS, payload: result.data});
       } catch (error) {
+        // console.log(error.response);
         dispatch({ type: LOGIN_ERROR, error });
       }
     };
@@ -31,8 +32,8 @@ import {
         // console.log("credentials");
         // console.log(credentials); 
         const result = await Axios.post("/user/signup", credentials);
-        console.log("helle");
-        console.log(result);
+        // console.log("helle");
+        // console.log(result);
         dispatch({ type: SIGNUP_SUCCESS, payload: result.data});
       } catch (error) {
         dispatch({ type: SIGNUP_ERROR, error });
@@ -52,10 +53,12 @@ export const getOTP = (email) => {
     try {
       // console.log(email);
       const result = await Axios.post("/user/generateotp",{"email" : email});
-      console.log("getawait otp");
-      console.log(result.data); 
+      // console.log("getawait otp");
+      // console.log(result.data); 
       dispatch({ type: GET_OTP_SUCCESS, payload: result.data });
     } catch (error) {
+      // console.log(error.response);
+      // console.log(result);
       dispatch({ type: GET_OTP_ERROR, error });
     }
   };
@@ -66,7 +69,7 @@ export const userDetail = ()=>{
   return async (dispatch) => {
     try{
       // console.log("heyhey");
-      const result = await Axios.get("/api/users/userdetail/" + localStorage.getItem("name"));
+      const result = await Axios.get("/user/getdetail/" + localStorage.getItem("name"));
       // console.log("getawait userdetail");
       // console.log("hello",result); 
       dispatch({ type: GET_USER_DETAIL_SUCCESS, payload: result.data });

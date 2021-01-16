@@ -24,18 +24,18 @@ import {
         return {
           ...state,
           loggedIn: action.payload.status,
-          userData: action.payload.userData,
+          userData: action.payload,
           authMessage: action.payload.msg,
         };
       case LOGIN_ERROR:
         return {
           ...state,
-          authMessage: action.error,
+          authMessage: action.error.response.data.msg,
         };
       case SIGNUP_SUCCESS:
         return {
           ...state,
-          loggedIn: action.payload.verified,
+          loggedIn: action.payload.status,
           userData: action.payload,
           authMessage: action.payload.msg,
         };
@@ -43,7 +43,7 @@ import {
       case SIGNUP_ERROR:
         return {
           ...state,
-          authMessage: action.error.response.data.error,
+          authMessage: action.error.response.data.msg,
         };
   
       case SIGNOUT:
@@ -62,7 +62,7 @@ import {
   
         case GET_OTP_ERROR:
         return {
-          authMessage: action.error,
+          authMessage: action.error.response.data.msg,
         };
   
         case GET_USER_DETAIL_SUCCESS:
@@ -73,7 +73,7 @@ import {
       case GET_USER_DETAIL_ERROR:
         return {
           ...state,
-          authMessage: action.error,
+          authMessage: action.error.response.data.msg,
         };
   
       default:
