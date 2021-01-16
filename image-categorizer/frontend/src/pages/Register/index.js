@@ -160,7 +160,7 @@ class RegisterForm extends React.Component {
                               onChange={this.handleChange}
                               value={username}
                             />
-                            <label for="orangeForm-name">Your name</label>
+                            <label htmlFor="orangeForm-name">Your name</label>
                             {errors["username"] && (
                               <div className="alert alert-danger">
                                 {" "}
@@ -179,7 +179,7 @@ class RegisterForm extends React.Component {
                               onChange={this.handleChange}
                               value={email}
                             />
-                            <label for="orangeForm-email">Your email</label>
+                            <label htmlFor="orangeForm-email">Your email</label>
                             {errors["email"] && (
                               <div className="alert alert-danger">
                                 {" "}
@@ -199,7 +199,7 @@ class RegisterForm extends React.Component {
                               // label="password"
                               value={password}
                             />
-                            <label for="orangeForm-pass">Your password</label>
+                            <label htmlFor="orangeForm-pass">Your password</label>
                             {errors["password"] && (
                               <div className="alert alert-danger">
                                 {" "}
@@ -219,7 +219,7 @@ class RegisterForm extends React.Component {
                                 onChange={this.handleChange}
                                 value={otp}
                               />
-                              <label for="orangeForm-otp">Enter OTP</label>
+                              <label htmlFor="orangeForm-otp">Enter OTP</label>
                             </div>
                           ) : (
                             ""

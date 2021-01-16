@@ -7,8 +7,9 @@ import {
 
 import { Provider } from "react-redux";
 import store from "./store";
-import Register from "./pages/Register";
 import LandingPage from "./pages/LandingPage";
+import Register from "./pages/Register";
+import Login from "./pages/LogIn";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Switch>
               <Route exact path = "/" component={LandingPage}/>
               <Route exact path = "/register" component={Register} />
+              <Route exact path = "/login" component={Login} />
             </Switch> 
           </div>
         </Router>
