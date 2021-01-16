@@ -7,7 +7,7 @@ const otpGenerator = require('otp-generator')
 class UserUtility{
 
     constructor(redisClient){
-        this.redisClient = redisClient
+        this.redisClient = redisClient;
     }
 
     async getValue(key) {
