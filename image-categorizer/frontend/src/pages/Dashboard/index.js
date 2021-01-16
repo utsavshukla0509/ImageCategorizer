@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import Header from "./header-index";
-import Footer from "./footer-index";
+import Header from "./header";
+import Footer from "./footer";
 import _ from "lodash";
-import { ImageTable, Pagination } from "../../components";
+// import { ImageTable, Pagination } from "../../components";
 // import { ListGroup } from "../../components/common";
 
-import { getImages } from "../../actions/imageAction";
-import {
-  getGenres,
-  getAllGenres,
-  downloadGenres,
-} from "../../actions/imageAction";
+// import { getImages } from "../../actions/imageAction";
+// import {
+//   getGenres,
+//   getAllGenres,
+//   downloadGenres,
+// } from "../../actions/imageAction";
 
 
 class Dashboard extends React.Component {
@@ -449,21 +449,21 @@ class Dashboard extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getImages: (genre) => dispatch(getImages(genre)),
-    getGenres: () => dispatch(getGenres()),
-    getAllGenres: () => dispatch(getAllGenres()),
-    downloadGenres: (genre_list) => dispatch(downloadGenres(genre_list)),
+    // getImages: (genre) => dispatch(getImages(genre)),
+    // getGenres: () => dispatch(getGenres()),
+    // getAllGenres: () => dispatch(getAllGenres()),
+    // downloadGenres: (genre_list) => dispatch(downloadGenres(genre_list)),
   };
 };
 
 const mapStateToProps = (state) => {
   return {
-    images: state.image.images,
-    loading: state.image.loading,
-    loadingPage: state.image.loadingPage,
-    genres: state.image.genres,
-    genreList: state.image.genreList,
-    loggedIn: state.auth.loggedIn,
+    // images: state.image.images,
+    // loading: state.image.loading,
+    // loadingPage: state.image.loadingPage,
+    // genres: state.image.genres,
+    // genreList: state.image.genreList,
+    // loggedIn: state.auth.loggedIn,
   };
 };
 

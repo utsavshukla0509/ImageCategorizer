@@ -1,10 +1,10 @@
 import React from "react";
 import img from "./dashboardUserImage.jpg";
-import FileUpload from "./file_upload";
+import FileUpload from "./fileUpload";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { userDetail, signOut } from "../../actions/authAction";
-import MultiDropDown from "./MultiDropDown";
+import MultiDropDown from "./multiDropDown";
 
 class Header extends React.Component {
   state = {
