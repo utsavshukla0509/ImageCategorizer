@@ -23,7 +23,7 @@ class UserUtility{
     }
 
     async generateToken(userData){
-        const token = await jwt.sign(userData, "MONGO_SECRET", { expiresIn: "7d" });
+        const token = await jwt.sign(userData, "POSTGRES_SECRET", { expiresIn: "7d" });
         return token;
     }   
 

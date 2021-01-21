@@ -11,7 +11,6 @@ class RegisterForm extends React.Component {
       password: "",
       otp: "",
     },
-    isVerify: false,
     errors: {},
     authError: "",
   };
@@ -76,32 +75,33 @@ class RegisterForm extends React.Component {
     username: Joi.string().alphanum().min(3).max(30),
     email: Joi.string().email().required().label("Email"),
     password: Joi.string().min(8).required().label("Password"),
-    otp: this.state.isVerify === false ? "" : Joi.string().min(6).max(6),
+    otp: this.props.isVerify === false ? "" : Joi.string().min(6).max(6),
   };
 
-  saveUserDetais(user, loggedIn, authMessage) {
-    if (authMessage !== "" && authMessage !== undefined) {
-      return;
-    }
-    if (user.userInfo === undefined) {
-      return;
-    }
-    if (loggedIn) {
-      localStorage.setItem("loggedIn", true);
-      if (localStorage.getItem("loggedIn") === "true") {
-        localStorage.setItem("name", user.userInfo.userid);
-      }
-    }
-  }
+  // saveUserDetais(user, loggedIn, authMessage) {
+  //   if (authMessage !== "" && authMessage !== undefined) {
+  //     return;
+  //   }
+  //   if (user.userInfo === undefined) {
+  //     return;
+  //   }
+  //   if (loggedIn) {
+  //     localStorage.setItem("loggedIn", true);
+  //     if (localStorage.getItem("loggedIn") === "true") {
+  //       localStorage.setItem("name", user.userInfo.userid);
+  //     }
+  //   }
+  // }
 
   render() {
-    if (this.props.status === true && this.state.isVerify === false) {
-      this.setState({ isVerify: true });
-    }
-    const { authMessage, userData, loggedIn } = this.props;
+    // if (this.props.status === true && this.state.isVerify === false) {
+    //   this.setState({ isVerify: true });
+    // }
+    const { authMessage, status, userData, loggedIn ,isVerify} = this.props;
     const { errors, authError } = this.state;
     const { username, email, password, otp } = this.state.data;
-    if (loggedIn) this.props.history.push("/dashboard");
+    console.log(status);
+    if (status) this.props.history.push("/login");
 
     return (
       <div>
@@ -139,11 +139,11 @@ class RegisterForm extends React.Component {
                       <div className="">
                         <form
                           onSubmit={this.handleSubmit}
-                          onClick={this.saveUserDetais(
-                            userData,
-                            loggedIn,
-                            authMessage
-                          )}
+                          // onClick={this.saveUserDetais(
+                          //   userData,
+                          //   loggedIn,
+                          //   authMessage
+                          // )}
                         >
                           <div className="md-form">
                             <i className="fas fa-user prefix"></i>
@@ -204,7 +204,7 @@ class RegisterForm extends React.Component {
                             )}
                           </div>
 
-                          {this.state.isVerify ? (
+                          {isVerify ? (
                             <div className="md-form">
                               <i className="fas fa-key prefix"></i>
                               <input
@@ -226,7 +226,7 @@ class RegisterForm extends React.Component {
                           ) : (
                             <> </>
                           )}
-                          {this.state.isVerify ? (
+                          {isVerify ? (
                             <div className="row" style={{ display: "flex" }}>
                               <div className="text-center col-6">
                                 <button
@@ -287,6 +287,7 @@ const mapStateToProps = (state) => {
     loggedIn: state.auth.loggedIn,
     authMessage: state.auth.authMessage,
     status: state.auth.status,
+    isVerify : state.auth.isVerify
   };
 };
 const mapDispatchToProps = (dispatch) => {

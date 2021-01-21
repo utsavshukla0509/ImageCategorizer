@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 // const checkAuth = require("../middleware/checkAuth");
 
+
+
 router.post("/signup",(req,res,next) => {
     req.container.resolve('signUpApi').handleRequest(req,res).catch(next);
 });
