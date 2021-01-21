@@ -23,7 +23,7 @@ class SignIn{
                 const result = await this.userUtility.comparePassword(password,userData.rows[0].password);
                 if(result){
                     let userInfo = {};
-                    userInfo.userid = userData.rows[0].userid;
+                    userInfo.userId = userData.rows[0].userid;
                     userInfo.username = userData.rows[0].username;
                     userInfo.email = userData.rows[0].email;
                     const token = await this.userUtility.generateToken(userInfo);   

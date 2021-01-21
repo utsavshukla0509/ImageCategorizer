@@ -35,7 +35,7 @@ import {
       case SIGNUP_SUCCESS:
         return {
           ...state,
-          loggedIn: action.payload.status,
+          status: action.payload.status,
           userData: action.payload,
           authMessage: action.payload.msg,
         };
@@ -57,7 +57,7 @@ import {
         case GET_OTP_SUCCESS:
         return {
           authMessage: action.payload.msg,
-          status : action.payload.status
+          isVerify : action.payload.status
         };
   
         case GET_OTP_ERROR:

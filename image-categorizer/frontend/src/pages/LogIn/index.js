@@ -58,7 +58,8 @@ class Login extends React.Component {
 
   saveUserDetais(user, loggedIn) {
     if (loggedIn) {
-     localStorage.setItem("name",user.userInfo.userid)
+      localStorage.setItem("name",user.token);
+    //  localStorage.setItem("name",user.userInfo.userid)
       localStorage.setItem("loggedIn", true);
     }
   }
