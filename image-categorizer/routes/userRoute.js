@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-// const checkAuth = require("../middleware/checkAuth");
+const checkAuth = require("../middleware/checkAuth");
 
 
 
@@ -12,7 +12,7 @@ router.post("/signin",(req,res,next) => {
     req.container.resolve('signInApi').handleRequest(req,res).catch(next);
 });
 
-router.get("/getdetail/:userId",(req,res,next) => {
+router.get("/getdetail/:userId",checkAuth,(req,res,next) => {
     req.container.resolve('userDetailApi').handleRequest(req,res).catch(next);
 });
 

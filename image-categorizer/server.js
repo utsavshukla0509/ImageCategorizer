@@ -1,12 +1,13 @@
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
-const init = require("./models/index");
+// const init = require("./models/index");
 require('dotenv').config();
 const container = require("./di");
 
 
 const userRoute = require("./routes/userRoute");
+const imageRoute = require("./routes/imageRoute");
 
 
 const app = express();
@@ -27,6 +28,7 @@ app.use((req,res,next)=>{
 
 
 app.use("/user", userRoute);
+app.use("/image", imageRoute);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
