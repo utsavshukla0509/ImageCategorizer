@@ -6,7 +6,7 @@ const userImageLabelTable = `CREATE TABLE ${tableName} (
 userId INTEGER NOT NULL,
 imageId INTEGER NOT NULL,
 label VARCHAR(20) NOT NULL,
-PRIMARY KEY (userId, imageId)
+PRIMARY KEY (imageId, label)
 );`;
 
 module.exports = userImageLabelTable;

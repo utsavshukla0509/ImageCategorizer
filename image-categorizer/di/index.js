@@ -20,6 +20,8 @@ const container = createContainer({injectionMode : InjectionMode.CLASSIC});
 container.register({
     postgresClient : asValue(middleware.postgresClient),
     redisClient : asValue(middleware.redisClient),
+    clarifaiAPI : asValue(middleware.clarifaiAPI),
+    cloudinaryAPI : asValue(middleware.cloudinaryAPI),
 });
 
 
@@ -27,17 +29,26 @@ container.register({
 
 //REPO
 container.register('userRepo', asClass(require("../repository/userRepo"), getScope()));
+container.register('imageRepo', asClass(require("../repository/imageRepo"), getScope()));
+container.register('imageLabelRepo', asClass(require("../repository/imageLabelRepo"), getScope()));
 
 
-//API
+//APIS
+//User
 container.register('userDetailApi', asClass(require("../controller/user/userDetail"), getScope()));
 container.register('signInApi', asClass(require("../controller/user/signIn"), getScope()));
 container.register('signUpApi', asClass(require("../controller/user/signUp"), getScope()));
 container.register('generateOTPApi', asClass(require("../controller/user/generateOTP"), getScope()));
 
+//Image
+container.register('addImageApi', asClass(require("../controller/image/addImage"), getScope()));
+container.register('getImagesApi', asClass(require("../controller/image/getImages"), getScope()));
+
+
 
 //Utility
 container.register('userUtility', asClass(require("../utilities/userUtility"), getScope()));
+container.register('imageUtility', asClass(require("../utilities/imageUtility"), getScope()));
 container.register('helper', asClass(require("../utilities/helper"), getScope()));
 
 
