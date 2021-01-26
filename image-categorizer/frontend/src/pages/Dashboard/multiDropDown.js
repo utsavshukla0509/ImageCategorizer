@@ -14,7 +14,7 @@ class MultiDropDown extends React.Component{
     }
 
     onChangeCheck = (e) => {
-        // console.log(e.target.name,e.target.checked);
+        console.log(e.target.name,e.target.checked);
         let name = e.target.name;
         
         let tempGenreList = this.state.genreList;
@@ -54,7 +54,6 @@ class MultiDropDown extends React.Component{
 
     render(){
         const { genreAllList} = this.props;
-        console.log(genreAllList);
        return(
 
             <li className="nav-item">
@@ -65,16 +64,15 @@ class MultiDropDown extends React.Component{
 
                     {  genreAllList && 
                         genreAllList.map((ele)=>{
-                            console.log(ele);
                             return(
                                 
                                 <a className="dropdown-item" >
                                     <div className = "custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input" id={1}
+                                    <input type="checkbox" className="custom-control-input" id={ele.label}
                                     name = {ele.label}
                                     onChange = {this.onChangeCheck}
                                     />
-                                    <label className="custom-control-label" htmlFor={ele._id}>{ele.label}</label>
+                                    <label className="custom-control-label" htmlFor={ele.label}>{ele.label}</label>
                                     </div>
                                 </a>
                             );

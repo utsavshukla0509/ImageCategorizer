@@ -109,8 +109,8 @@ class Header extends React.Component {
             <a href="#" className="list-group-item active waves-effect">
               <i className="far fa-images mr-3"></i>Photos
             </a>
-            {/* <a href="http://localhost:3000/profile" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fas fa-user mr-3"></i>Profile</a> */}
+            {/* <a href="http://localhost:3000/profile" className="list-group-item list-group-item-action waves-effect">
+                        <i className="fas fa-user mr-3"></i>Profile</a> */}
           </div>
         </div>
       </header>

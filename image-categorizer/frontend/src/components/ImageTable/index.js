@@ -4,8 +4,7 @@ export default function ImageTable({ images, currentPage, pageSize, genre ,onDel
   // console.log("genreimages");
   // console.log(images);
 
-  let imageList = images.data;
-  const currentImages = imageList ?  imageList.slice(
+  const currentImages = images ?  images.slice(
     (currentPage - 1) * pageSize,
     pageSize * currentPage
   ) : [];
@@ -18,7 +17,7 @@ export default function ImageTable({ images, currentPage, pageSize, genre ,onDel
    
      
       <div class="mdb-lightbox ">
-        {!!imageList &&
+        {!!images &&
           currentImages.map((img) => {
             const coverImage = img.image;
             // console.log("upload_image",coverImage);
