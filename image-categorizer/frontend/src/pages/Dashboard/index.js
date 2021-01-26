@@ -71,11 +71,11 @@ class Dashboard extends React.Component {
               return (
                 <li
                   className={"showList"}
-                  id={optionName}
-                  key={optionName}
+                  id={optionName.label}
+                  key={optionName.label}
                   onClick={this.onOpenGenre}
                 >
-                  {optionName}
+                  {optionName.label}
                 </li>
               );
             })}
@@ -114,7 +114,7 @@ class Dashboard extends React.Component {
 
         const filteredGenres = options.filter(
           (optionName) =>
-            optionName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+            optionName.label.toLowerCase().indexOf(userInput.toLowerCase()) > -1
         );
         // console.log(filteredGenres.length);
       if(filteredGenres.length === 0){
@@ -158,8 +158,8 @@ class Dashboard extends React.Component {
     const { images, genreAllList, loggedIn,loading,loadingPage} = this.props;
     if (!localStorage.getItem('loggedIn')) this.props.history.push("/login");
     let filteredImages = [];
-    filteredImages = images;
-    // console.log("images",genreAllList);
+    filteredImages = images.data;
+    // console.log("images",filteredImages);
     // console.log(this.state.filteredGenres);
 
     // if (loadingPage) {
@@ -404,7 +404,7 @@ class Dashboard extends React.Component {
             )}
 
             <p className="text-left text-muted mt-3 font-weight-bold text-primary">
-              {filteredImages &&  !!filteredImages.length ? `${filteredImages.length} ` : "0 "}
+              {filteredImages &&  filteredImages.length ? `${filteredImages.length} ` : "0 "}
               Images found.
             </p>
             <hr></hr>

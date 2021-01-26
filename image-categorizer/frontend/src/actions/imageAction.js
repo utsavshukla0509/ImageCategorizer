@@ -34,13 +34,6 @@ export const getImages = (label) => {
 };
 
 export const addImage = (img) => {
-  const contentType = {
-    headers: {
-      "content-type": "multipart/form-data",
-    },
-  };
-
-
 
   console.log("imageList",img);
 
@@ -53,14 +46,23 @@ export const addImage = (img) => {
   img.forEach((oneImg)=>{
     formData.append("image[]",oneImg);  
   })
-  formData.append("user_id", localStorage.getItem('name'));
+  formData.append("userId", localStorage.getItem('name'));
 
 
   return async (dispatch) => {
     dispatch({type : SHOW_LOADER});
     try {
-      const promise1 = await Axios.put("/image/addimage",formData,contentType);
-      const promise2 = await Axios.get("/label/getlabels/"+localStorage.getItem('name'));
+      const promise1 = await Axios.post("/image/addimage",formData, {
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('name')}` 
+        }
+      });
+      const promise2 = await Axios.get("/label/getlabels/", {
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('name')}` ,
+          "content-type": "multipart/form-data"
+        }
+      });
       
       // console.log("addimage");
       Promise.all([promise1, promise2])
