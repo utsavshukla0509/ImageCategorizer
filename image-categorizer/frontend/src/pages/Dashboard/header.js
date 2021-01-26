@@ -12,7 +12,7 @@ class Header extends React.Component {
   };
 
   componentDidMount() {
-   this.props.userDetail();
+  //  this.props.userDetail();
   }
 
   LogOut = () => {

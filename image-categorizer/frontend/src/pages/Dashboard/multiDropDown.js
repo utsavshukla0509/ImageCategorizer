@@ -9,7 +9,7 @@ class MultiDropDown extends React.Component{
     }
         
     componentDidMount(){
-        this.props.getGenres();
+        // this.props.getGenres();
         
     }
 
@@ -53,8 +53,8 @@ class MultiDropDown extends React.Component{
 
 
     render(){
-        const { genres} = this.props;
-        // console.log(this.state.genreList);
+        const { genreAllList} = this.props;
+        console.log(genreAllList);
        return(
 
             <li className="nav-item">
@@ -63,19 +63,18 @@ class MultiDropDown extends React.Component{
                     aria-haspopup="true" aria-expanded="false">Import</button>
                     <form className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                      
-                   
-                    {   
-                        genres.map((ele)=>{
+                    {  genreAllList && 
+                        genreAllList.map((ele)=>{
+                            console.log(ele);
                             return(
                                 
                                 <a className="dropdown-item" >
                                     <div className = "custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input" id={ele._id}
-                                    name = {ele.name}
+                                    <input type="checkbox" className="custom-control-input" id={1}
+                                    name = {ele.label}
                                     onChange = {this.onChangeCheck}
                                     />
-                                    <label className="custom-control-label" htmlFor={ele._id}>{ele.name}</label>
+                                    <label className="custom-control-label" htmlFor={ele._id}>{ele.label}</label>
                                     </div>
                                 </a>
                             );
@@ -103,7 +102,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-      genres: state.image.genres,
+      genreAllList: state.genre.genreAllList,
     };
   };
   

@@ -3,15 +3,14 @@ import { connect } from "react-redux";
 import Header from "./header";
 import Footer from "./footer";
 import _ from "lodash";
-// import { ImageTable, Pagination } from "../../components";
+import { ImageTable, Pagination } from "../../components";
 // import { ListGroup } from "../../components/common";
-
-// import { getImages } from "../../actions/imageAction";
-// import {
-//   getGenres,
-//   getAllGenres,
-//   downloadGenres,
-// } from "../../actions/imageAction";
+import { getImages } from "../../actions/imageAction";
+import {
+  getGenres,
+  getAllGenres,
+  downloadGenres,
+} from "../../actions/genreAction";
 
 
 class Dashboard extends React.Component {
@@ -19,12 +18,12 @@ class Dashboard extends React.Component {
     genres: [],
     pageSize: 12,
     currentPage: 1,
-    currentGenre: "All",
+    currentGenre: "all",
     filteredGenres: [],
     showOptions: false,
     userInput: "",
     isGenreDisplay: false,
-    toggleName: "All",
+    toggleName: "all",
     enableName : '',
     
   };
@@ -156,11 +155,12 @@ class Dashboard extends React.Component {
   render() {
    
     const { currentPage, pageSize} = this.state;
-    const { images, genres, loggedIn,loading,loadingPage} = this.props;
-    if (!loggedIn) this.props.history.push("/login");
+    const { images, genreAllList, loggedIn,loading,loadingPage} = this.props;
+    if (!localStorage.getItem('loggedIn')) this.props.history.push("/login");
     let filteredImages = [];
     filteredImages = images;
-    // console.log("images",images);
+    // console.log("images",genreAllList);
+    // console.log(this.state.filteredGenres);
 
     // if (loadingPage) {
     //   return (
@@ -185,32 +185,32 @@ class Dashboard extends React.Component {
     let div4 = ["btn", "btn-outline-info", "btn-rounded", " waves-effect"];
     let div5 = ["btn", "btn-outline-info", "btn-rounded", " waves-effect"];
 
-    if (this.state.toggleName === Object(genres[0]).name) {
+    if (this.state.toggleName === Object(genreAllList[0]).label) {
       div0.push("btn-info");
       div0 = div0.filter((ele) => {
         return ele !== "btn-outline-info";
       });
-    } else if (this.state.toggleName === Object(genres[1]).name) {
+    } else if (this.state.toggleName === Object(genreAllList[1]).label) {
       div1.push("btn-info");
       div1 = div1.filter((ele) => {
         return ele !== "btn-outline-info";
       });
-    } else if (this.state.toggleName === Object(genres[2]).name) {
+    } else if (this.state.toggleName === Object(genreAllList[2]).label) {
       div2.push("btn-info");
       div2 = div2.filter((ele) => {
         return ele !== "btn-outline-info";
       });
-    } else if (this.state.toggleName === Object(genres[3]).name) {
+    } else if (this.state.toggleName === Object(genreAllList[3]).label) {
       div3.push("btn-info");
       div3 = div3.filter((ele) => {
         return ele !== "btn-outline-info";
       });
-    } else if (this.state.toggleName === Object(genres[4]).name) {
+    } else if (this.state.toggleName === Object(genreAllList[4]).label) {
       div4.push("btn-info");
       div4 = div4.filter((ele) => {
         return ele !== "btn-outline-info";
       });
-    } else if (this.state.toggleName === Object(genres[5]).name) {
+    } else if (this.state.toggleName === Object(genreAllList[5]).label) {
       div5.push("btn-info");
       div5 = div5.filter((ele) => {
         return ele !== "btn-outline-info";
@@ -292,10 +292,10 @@ class Dashboard extends React.Component {
             ) : (
 
               <div className="list-group ">
-                {images.length !== 0 ? (
+                {images && images.length !== 0 ? (
                   <div className="d-flex p-2 bd-highlight mx-md-auto">
                     <div
-                      key={Object(genres[0])._id}
+                      key={Object(genreAllList[0])._id}
                       className="p-2 bd-highlight "
                     >
                       <button
@@ -304,15 +304,15 @@ class Dashboard extends React.Component {
                         onClick={() =>
                           this.handleChange(
                             "currentGenre",
-                            Object(genres[0]).name
+                            Object(genreAllList[0]).label
                           )
                         }
                       >
-                        {Object(genres[0]).name}
+                        {Object(genreAllList[0]).label}
                       </button>
                     </div>
                     <div
-                      key={Object(genres[1])._id}
+                      key={Object(genreAllList[1])._id}
                       className="p-2 bd-highlight "
                     >
                       <button
@@ -321,15 +321,15 @@ class Dashboard extends React.Component {
                         onClick={() =>
                           this.handleChange(
                             "currentGenre",
-                            Object(genres[1]).name
+                            Object(genreAllList[1]).label
                           )
                         }
                       >
-                        {Object(genres[1]).name}
+                        {Object(genreAllList[1]).label}
                       </button>
                     </div>
                     <div
-                      key={Object(genres[2])._id}
+                      key={Object(genreAllList[2])._id}
                       className="p-2 bd-highlight "
                     >
                       <button
@@ -338,15 +338,15 @@ class Dashboard extends React.Component {
                         onClick={() =>
                           this.handleChange(
                             "currentGenre",
-                            Object(genres[2]).name
+                            Object(genreAllList[2]).label
                           )
                         }
                       >
-                        {Object(genres[2]).name}
+                        {Object(genreAllList[2]).label}
                       </button>
                     </div>
                     <div
-                      key={Object(genres[3])._id}
+                      key={Object(genreAllList[3])._id}
                       className="p-2 bd-highlight "
                     >
                       <button
@@ -355,15 +355,15 @@ class Dashboard extends React.Component {
                         onClick={() =>
                           this.handleChange(
                             "currentGenre",
-                            Object(genres[3]).name
+                            Object(genreAllList[3]).label
                           )
                         }
                       >
-                        {Object(genres[3]).name}
+                        {Object(genreAllList[3]).label}
                       </button>
                     </div>
                     <div
-                      key={Object(genres[4])._id}
+                      key={Object(genreAllList[4])._id}
                       className="p-2 bd-highlight "
                     >
                       <button
@@ -372,15 +372,15 @@ class Dashboard extends React.Component {
                         onClick={() =>
                           this.handleChange(
                             "currentGenre",
-                            Object(genres[4]).name
+                            Object(genreAllList[4]).label
                           )
                         }
                       >
-                        {Object(genres[4]).name}
+                        {Object(genreAllList[4]).label}
                       </button>
                     </div>
                     <div
-                      key={Object(genres[5])._id}
+                      key={Object(genreAllList[5])._id}
                       className="p-2 bd-highlight "
                     >
                       <button
@@ -389,11 +389,11 @@ class Dashboard extends React.Component {
                         onClick={() =>
                           this.handleChange(
                             "currentGenre",
-                            Object(genres[5]).name
+                            Object(genreAllList[5]).label
                           )
                         }
                       >
-                        {Object(genres[5]).name}
+                        {Object(genreAllList[5]).label}
                       </button>
                     </div>
                   </div>
@@ -404,7 +404,7 @@ class Dashboard extends React.Component {
             )}
 
             <p className="text-left text-muted mt-3 font-weight-bold text-primary">
-              {!!filteredImages.length ? `${filteredImages.length} ` : "0 "}
+              {filteredImages &&  !!filteredImages.length ? `${filteredImages.length} ` : "0 "}
               Images found.
             </p>
             <hr></hr>
@@ -431,7 +431,7 @@ class Dashboard extends React.Component {
                 
               <br />
               <Pagination
-                itemsCount={filteredImages.length}
+                itemsCount={filteredImages ? filteredImages.length : 0}
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChange={this.onPageChange}
@@ -449,21 +449,21 @@ class Dashboard extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // getImages: (genre) => dispatch(getImages(genre)),
-    // getGenres: () => dispatch(getGenres()),
-    // getAllGenres: () => dispatch(getAllGenres()),
+    getImages: (label) => dispatch(getImages(label)),
+    getGenres: () => dispatch(getGenres()),
+    getAllGenres: () => dispatch(getAllGenres()),
     // downloadGenres: (genre_list) => dispatch(downloadGenres(genre_list)),
   };
 };
 
 const mapStateToProps = (state) => {
   return {
-    // images: state.image.images,
-    // loading: state.image.loading,
-    // loadingPage: state.image.loadingPage,
-    // genres: state.image.genres,
-    // genreList: state.image.genreList,
-    // loggedIn: state.auth.loggedIn,
+    images: state.image.images,
+    loading: state.image.loading,
+    loadingPage: state.image.loadingPage,
+    genreList: state.genre.genreList,
+    genreAllList: state.genre.genreAllList,
+    loggedIn: state.auth.loggedIn,
   };
 };
 

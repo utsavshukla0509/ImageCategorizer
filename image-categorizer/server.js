@@ -8,6 +8,7 @@ const container = require("./di");
 
 const userRoute = require("./routes/userRoute");
 const imageRoute = require("./routes/imageRoute");
+const labelRoute = require("./routes/labelRoute");
 
 
 const app = express();
@@ -29,6 +30,7 @@ app.use((req,res,next)=>{
 
 app.use("/user", userRoute);
 app.use("/image", imageRoute);
+app.use("/label", labelRoute);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

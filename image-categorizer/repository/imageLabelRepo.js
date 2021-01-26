@@ -17,10 +17,20 @@ class ImageLabelRepo {
         (SELECT imageid FROM public.userimagelabel WHERE userid = ${userid} AND label = '${label}' );`;
         return this.postgresClient.query(query);
     }
-    // const query = `SELECT image,UIL.label FROM public.userimage UI, 
-    //         (SELECT imageid,label FROM public.userimagelabel WHERE userid = ${userid} AND label = '${label}' ) UIL 
-    //         WHERE UI.imageid = UIL.imageid;`;
-        
+    
+    async getLabels(userid){
+        const query = `SELECT DISTINCT(label) FROM public.userimagelabel WHERE userid = ${userid};`;
+        return this.postgresClient.query(query);
+    }
+
+    async getSortedLabels(userid){
+        const query = `SELECT label, COUNT(label)AS Frequency FROM public.userimagelabel
+            WHERE userid = ${userid}
+            GROUP BY label
+            ORDER BY COUNT(label) DESC;`;
+        return this.postgresClient.query(query);
+    }
+
     }
     
     module.exports = ImageLabelRepo;

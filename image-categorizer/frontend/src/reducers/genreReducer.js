@@ -17,7 +17,7 @@ import {
       case GET_GENRES_SUCCESS:
         return {
           ...state,
-          genreList: action.payload,
+          genreList: action.payload.data,
         };
   
       case GET_GENRES_ERROR:
@@ -29,7 +29,7 @@ import {
         case GET_ALL_GENRES_SUCCESS:
         return {
           ...state,
-          genreAllList: action.payload,
+          genreAllList: action.payload.data,
         };
   
       case GET_ALL_GENRES_ERROR:

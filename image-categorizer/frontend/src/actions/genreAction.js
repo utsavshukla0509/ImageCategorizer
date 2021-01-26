@@ -9,7 +9,11 @@ import {
 export const getGenres = () => {
     return async (dispatch) => {
       try {
-        const result = await Axios.get("/image/getgenre/" + localStorage.getItem('name'));
+        const result = await Axios.get("/label/getlabels",{
+          headers: {
+            'Authorization': `Beaver ${localStorage.getItem('name')}` 
+          }
+        });
         // console.log("multiplegenres");
         // console.log(result); 
         dispatch({ type: GET_GENRES_SUCCESS, payload: result.data });
@@ -23,8 +27,12 @@ export const getGenres = () => {
   export const getAllGenres = () => {
     return async (dispatch) => {
       try {
-        const result = await Axios.get("/image/getallgenre/" + localStorage.getItem('name'));
-        // console.log("multiplegenres");
+        const result = await Axios.get("/label/getsortedlabels", {
+          headers: {
+            'Authorization': `Beaver ${localStorage.getItem('name')}` 
+          }
+        });
+        // console.log("sortedgenres");
         // console.log(result); 
         dispatch({ type: GET_ALL_GENRES_SUCCESS, payload: result.data });
       } catch (error) {
