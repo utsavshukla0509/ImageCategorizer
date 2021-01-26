@@ -1,7 +1,3 @@
-// const UserRepo = require("../../repository/userRepo");
-
-// const userRepo = new UserRepo();
-
 
 class UserDetail{
 

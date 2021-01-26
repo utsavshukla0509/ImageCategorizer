@@ -20,7 +20,7 @@ router.post("/addimage",checkAuth,upload.array('image[]'),(req,res,next) => {
     req.container.resolve('addImageApi').handleRequest(req,res).catch(next);
 });
 
-router.get("/getimages/:userId/:label",checkAuth,(req,res,next) => {
+router.get("/getimages/:label",checkAuth,(req,res,next) => {
     req.container.resolve('getImagesApi').handleRequest(req,res).catch(next);
 });
 

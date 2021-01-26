@@ -13,7 +13,8 @@ class GETIMAGES{
       
     async handleRequest(req,res){    
         try{
-          const {userId,label} = req.params;
+          const {label} = req.params;
+          const userId = req.userData.userId;
           if(!userId || !label) {
             return this.helper.writeResponse({msg : "Empty User ID or Label" ,code : 404},null,res);
           }

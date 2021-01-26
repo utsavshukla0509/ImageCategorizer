@@ -44,7 +44,9 @@ container.register('generateOTPApi', asClass(require("../controller/user/generat
 container.register('addImageApi', asClass(require("../controller/image/addImage"), getScope()));
 container.register('getImagesApi', asClass(require("../controller/image/getImages"), getScope()));
 
-
+//Label
+container.register('getLabelsApi', asClass(require("../controller/label/getLabels"), getScope()));
+container.register('getSortedLabelsApi', asClass(require("../controller/label/getSortedLabels"), getScope()));
 
 //Utility
 container.register('userUtility', asClass(require("../utilities/userUtility"), getScope()));

@@ -3,10 +3,12 @@ import React from "react";
 export default function ImageTable({ images, currentPage, pageSize, genre ,onDelete}) {
   // console.log("genreimages");
   // console.log(images);
-  const currentImages = images.slice(
+
+  let imageList = images.data;
+  const currentImages = imageList ?  imageList.slice(
     (currentPage - 1) * pageSize,
     pageSize * currentPage
-  );
+  ) : [];
 
   // console.log("images present in image table ");
   // console.log(currentImages);
@@ -16,9 +18,9 @@ export default function ImageTable({ images, currentPage, pageSize, genre ,onDel
    
      
       <div class="mdb-lightbox ">
-        {!!images &&
-          currentImages.map((image) => {
-            const coverImage = image.img_name;
+        {!!imageList &&
+          currentImages.map((img) => {
+            const coverImage = img.image;
             // console.log("upload_image",coverImage);
             return (
               <figure className="" >

@@ -7,21 +7,25 @@ import {
   SHOW_PAGE_LOADER,HIDE_PAGE_LOADER,
 } from "./actionTypes";
 
-export const getImages = (genre) => {
+export const getImages = (label) => {
   return async (dispatch) => {
     dispatch({type : SHOW_PAGE_LOADER});
     try {
       // console.log("genre",genre);
       // if(genre === undefined){genre = "All";}
-      const result =  await Axios.get("/api/images/getimages/"+localStorage.getItem('name')+"/"+genre);
+      const result =  await Axios.get("/image/getimages/"+"/"+label, {
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('name')}` 
+        }
+      });
       // console.log("multiple");
-      // console.log(result.data.image.length);
-      if(result.data.image.length === 0){
+      // console.log(result);
+      if(result.data.length === 0){
         dispatch({type : HIDE_PAGE_LOADER});
       }
       else{
         dispatch({type : HIDE_PAGE_LOADER});
-        dispatch({ type: GET_IMAGES_SUCCESS, payload: result.data.image});
+        dispatch({ type: GET_IMAGES_SUCCESS, payload: result.data});
       }
     } catch (error) {
       dispatch({ type: GET_IMAGES_ERROR, error });
@@ -55,8 +59,8 @@ export const addImage = (img) => {
   return async (dispatch) => {
     dispatch({type : SHOW_LOADER});
     try {
-      const promise1 = await Axios.put("/api/images/addimage",formData,contentType);
-      const promise2 = await Axios.get("/api/images/getgenres/"+localStorage.getItem('name'));
+      const promise1 = await Axios.put("/image/addimage",formData,contentType);
+      const promise2 = await Axios.get("/label/getlabels/"+localStorage.getItem('name'));
       
       // console.log("addimage");
       Promise.all([promise1, promise2])
@@ -74,19 +78,19 @@ export const addImage = (img) => {
   };
 };
 
-export const deleteImage = (image_url) => {
-    return async (dispatch) => {
-      try {
+// export const deleteImage = (image_url) => {
+//     return async (dispatch) => {
+//       try {
   
-        const result = await Axios.delete("/api/images/deleteimage",{"user_id" : localStorage.getItem("name"),"image_url":image_url});
-        console.log("multiplegenres");
-        console.log(result); 
-        dispatch({ type: DELETE_IMAGE_SUCCESS, payload: result.data });
-      } catch (error) {
-        dispatch({ type: DELETE_IMAGE_ERROR, error });
-      }
-    };
-  };
+//         const result = await Axios.delete("/api/images/deleteimage",{"user_id" : localStorage.getItem("name"),"image_url":image_url});
+//         console.log("multiplegenres");
+//         console.log(result); 
+//         dispatch({ type: DELETE_IMAGE_SUCCESS, payload: result.data });
+//       } catch (error) {
+//         dispatch({ type: DELETE_IMAGE_ERROR, error });
+//       }
+//     };
+//   };
 
 export const showLoader = () => dispatch => {
   dispatch({
