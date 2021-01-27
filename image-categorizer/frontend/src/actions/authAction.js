@@ -10,6 +10,10 @@ import {
     GET_USER_DETAIL_ERROR,
     UPLOAD_USER_IMAGE_SUCCESS,
     UPLOAD_USER_IMAGE_ERROR,
+    FORGOT_VERIFY_SUCCESS,
+    FORGOT_VERIFY_ERROR,
+    FORGOT_UPDATE_SUCCESS,
+    FORGOT_UPDATE_ERROR,
   } from "./actionTypes";
   import Axios from "axios";
 
@@ -71,7 +75,7 @@ export const userDetail = ()=>{
   return async (dispatch) => {
     try{
       // console.log("heyhey");
-      const result = await Axios.get("/user/getdetail/",{
+      const result = await Axios.get("/user/getdetail",{
         headers: {
           'Authorization': `Beaver ${localStorage.getItem('name')}` 
         }
@@ -87,26 +91,22 @@ export const userDetail = ()=>{
 };
 
 export const addUserImage = (image) => {
-  
-  const contentType = {
-    headers: {
-      "content-type": "multipart/form-data",
-    },
-  };
   let formData = new FormData();
   formData.append("path",Date.now() + "-" + image.name);
   formData.append("image", image);
-  formData.append("user_id", localStorage.getItem('name'));
+  formData.append("userId", localStorage.getItem('name'));
 
   return async (dispatch) => {
     try {
       const result = await Axios.put(
-        "/api/users/uploadprofileimage",
-        formData,
-        contentType
-      );
+        "/user/addimage",formData,{
+          headers: {
+            'Authorization': `Beaver ${localStorage.getItem('name')}`,
+            "content-type": "multipart/form-data" 
+          }
+        });
       // console.log("come");
-      // console.log(result.data);
+      // console.log(result);
       dispatch({ type: UPLOAD_USER_IMAGE_SUCCESS, payload: result.data});
     } catch (error) {
       dispatch({ type: UPLOAD_USER_IMAGE_ERROR, error });
@@ -120,12 +120,42 @@ export const updateandVerify = (credentials) => {
       // console.log("credentials");
       // console.log(credentials);
       credentials.user_id = localStorage.getItem("name");
-      const result = await Axios.put("/api/users/updateandverify", credentials);
+      const result = await Axios.put("/user/updateandverify", credentials);
       // console.log("helle");
       // console.log(result);
       dispatch({ type: PROFILE_UPDATE_SUCCESS, payload: result.data});
     } catch (error) {
       dispatch({ type: PROFILE_UPDATE_ERROR, error });
+    }
+  };
+};
+
+
+export const forgotandverify = (email) => {
+  return async (dispatch) => {
+    try {
+      const result = await Axios.post("/user/forgotandverify", {"email" : email,});
+      // console.log("helle");
+      // console.log(result);
+      dispatch({ type: FORGOT_VERIFY_SUCCESS, payload: result.data});
+    } catch (error) {
+      dispatch({ type: FORGOT_VERIFY_ERROR, error });
+    }
+  };
+};
+
+export const forgotandupdate = (credentials) => {
+  return async (dispatch) => {
+    try {
+      // console.log("credentials");
+      // console.log(credentials);
+      credentials.user_id = localStorage.getItem("name");
+      const result = await Axios.put("/user/forgotandupdate", credentials);
+      // console.log("helle");
+      // console.log(result);
+      dispatch({ type: FORGOT_UPDATE_SUCCESS, payload: result.data});
+    } catch (error) {
+      dispatch({ type: FORGOT_UPDATE_ERROR, error });
     }
   };
 };

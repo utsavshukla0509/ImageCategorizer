@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Login from "./pages/LogIn";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import ForgetPassword from "./pages/ForgetPassword";
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
               <Route exact path = "/login" component={Login} />
               <Route exact path = "/dashboard" component={Dashboard} />
               <Route exact path = "/profile" component={Profile} />
+              <Route exact path = "/forgotpassword" component={ForgetPassword} />
             </Switch> 
           </div>
         </Router>
