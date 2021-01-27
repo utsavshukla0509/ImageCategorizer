@@ -8,6 +8,8 @@ import {
     GET_OTP_ERROR,
     GET_USER_DETAIL_SUCCESS,
     GET_USER_DETAIL_ERROR,
+    UPLOAD_USER_IMAGE_SUCCESS,
+    UPLOAD_USER_IMAGE_ERROR,
   } from "./actionTypes";
   import Axios from "axios";
 
@@ -69,13 +71,61 @@ export const userDetail = ()=>{
   return async (dispatch) => {
     try{
       // console.log("heyhey");
-      const result = await Axios.get("/user/getdetail/" + localStorage.getItem("name"));
+      const result = await Axios.get("/user/getdetail/",{
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('name')}` 
+        }
+      });
       // console.log("getawait userdetail");
       // console.log("hello",result); 
       dispatch({ type: GET_USER_DETAIL_SUCCESS, payload: result.data });
     }
     catch(error){
       dispatch({ type: GET_USER_DETAIL_ERROR, error });
+    }
+  };
+};
+
+export const addUserImage = (image) => {
+  
+  const contentType = {
+    headers: {
+      "content-type": "multipart/form-data",
+    },
+  };
+  let formData = new FormData();
+  formData.append("path",Date.now() + "-" + image.name);
+  formData.append("image", image);
+  formData.append("user_id", localStorage.getItem('name'));
+
+  return async (dispatch) => {
+    try {
+      const result = await Axios.put(
+        "/api/users/uploadprofileimage",
+        formData,
+        contentType
+      );
+      // console.log("come");
+      // console.log(result.data);
+      dispatch({ type: UPLOAD_USER_IMAGE_SUCCESS, payload: result.data});
+    } catch (error) {
+      dispatch({ type: UPLOAD_USER_IMAGE_ERROR, error });
+    }
+  };
+};
+
+export const updateandVerify = (credentials) => {
+  return async (dispatch) => {
+    try {
+      // console.log("credentials");
+      // console.log(credentials);
+      credentials.user_id = localStorage.getItem("name");
+      const result = await Axios.put("/api/users/updateandverify", credentials);
+      // console.log("helle");
+      // console.log(result);
+      dispatch({ type: PROFILE_UPDATE_SUCCESS, payload: result.data});
+    } catch (error) {
+      dispatch({ type: PROFILE_UPDATE_ERROR, error });
     }
   };
 };

@@ -24,7 +24,7 @@ import {
         return {
           ...state,
           loggedIn: action.payload.status,
-          userData: action.payload,
+          userData: action.payload.data,
           authMessage: action.payload.msg,
         };
       case LOGIN_ERROR:
@@ -36,7 +36,7 @@ import {
         return {
           ...state,
           status: action.payload.status,
-          userData: action.payload,
+          userData: action.payload.data,
           authMessage: action.payload.msg,
         };
   
@@ -68,7 +68,7 @@ import {
         case GET_USER_DETAIL_SUCCESS:
         return {
           ...state,
-          userData: action.payload,
+          userData: action.payload.data,
         };
       case GET_USER_DETAIL_ERROR:
         return {

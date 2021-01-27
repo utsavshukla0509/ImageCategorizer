@@ -12,7 +12,7 @@ class Header extends React.Component {
   };
 
   componentDidMount() {
-  //  this.props.userDetail();
+   this.props.userDetail();
   }
 
   LogOut = () => {
@@ -23,9 +23,9 @@ class Header extends React.Component {
 
   render() {
     const { authMessage, userData } = this.props;
-
+    // console.log("user",userData);
     let coverImage = img;
-    if(userData.user_image !== ""){
+    if(userData.user_image !== undefined){
       coverImage = userData.user_image;
     }
 
@@ -65,6 +65,7 @@ class Header extends React.Component {
                         width: "50px",
                         height: "50px",
                         marginTop: "3px",
+                        cursor: "pointer",
                       }}
                       src={coverImage}
                       alt="Avatar"

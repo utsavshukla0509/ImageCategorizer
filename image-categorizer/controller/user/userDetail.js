@@ -13,7 +13,7 @@ class UserDetail{
     
   async handleRequest(req,res){    
       try{
-        const userId = req.params.userId;
+        const userId = req.userData.userId;
         if(!userId) {
           return this.helper.writeResponse({msg : "Empty User ID" ,code : 404},null,res);
         }
