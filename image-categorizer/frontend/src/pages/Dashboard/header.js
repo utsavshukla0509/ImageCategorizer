@@ -7,15 +7,19 @@ import { userDetail, signOut } from "../../actions/authAction";
 import MultiDropDown from "./multiDropDown";
 
 class Header extends React.Component {
-  state = {
-    logout_status: localStorage.getItem("loggedIn")
-  };
+    constructor(props){
+      super(props);
+      this.state = {
+        logout_status: localStorage.getItem("loggedIn")
+      };
+      this.logOut = this.logOut.bind(this);
+    }
 
   componentDidMount() {
    this.props.userDetail();
   }
 
-  LogOut = () => {
+  logOut = () => {
     this.setState({ logout_status: false });
     localStorage.setItem("loggedIn", false);
     this.props.signOut();
@@ -88,7 +92,7 @@ class Header extends React.Component {
                       <a
                         className="dropdown-item "
                         id="filebtn2"
-                        onClick={this.LogOut}
+                        onClick={this.logOut}
                       >
                         Log out
                       </a>
@@ -103,7 +107,7 @@ class Header extends React.Component {
         <div className="sidebar-fixed position-fixed">
           <a className="logo-wrapper waves-effect" href = "http://localhost:3000/dashboard">
             <h2>
-              <strong className="blue-text ">PhotoCat</strong>
+              <strong className="blue-text ">ImageCat</strong>
             </h2>
           </a>
           <div className="list-group list-group-flush">

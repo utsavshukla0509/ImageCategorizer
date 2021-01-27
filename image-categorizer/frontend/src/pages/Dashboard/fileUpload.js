@@ -2,7 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { addImage,getImages} from "../../actions/imageAction";
 class FileUpload extends React.Component{
-
+  constructor(props){
+    super(props);
+    this.handleUpload = this.handleUpload.bind(this);
+  }
 
     handleUpload = (e) => {
       //  e.preventDefault();

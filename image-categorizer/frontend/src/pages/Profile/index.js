@@ -10,18 +10,26 @@ import { getOTP,
 import { Redirect } from 'react-router-dom';
 
 class Profile extends React.Component {
-  state = {
-    data: {
-      username: "",
-      email: "",
-      otp: "",
-      password: "",
-      currentpassword: "",
-    },
-    errors: {},
-    isVerify: false,
-    // visible:false
-  };
+   constructor(props){
+     super(props);
+    this.state = {
+      data: {
+        username: "",
+        email: "",
+        otp: "",
+        password: "",
+        currentpassword: "",
+      },
+      errors: {},
+      isVerify: false,
+      // visible:false
+    };
+    this.logOut = this.logOut.bind(this);
+    this.handleVerify = this.handleVerify.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleResend = this.handleResend.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
+  }
 
   componentDidMount() {
     this.props.userDetail();
@@ -29,7 +37,7 @@ class Profile extends React.Component {
 
   
 
-  LogOut = () => {
+  logOut = () => {
     localStorage.setItem("loggedIn", false);
     this.props.signOut();
   };
@@ -122,17 +130,17 @@ class Profile extends React.Component {
     const { authMessage,userData} = this.props;
     const { username, email,otp,password,currentpassword} = this.state.data;
     const {errors} = this.state;
-    // console.log(username,email);
+    // console.log("username",userData);
     if(localStorage.getItem('loggedIn') === 'false'){
       return <Redirect to = {"/login"} />
     }
 
 
   let coverImage = "https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg";
-  console.log(userData.username,userData.email);
+  // console.log(userData.username,userData.email);
 
-  if(userData.user_image !== undefined){
-    coverImage = userData.user_image;
+  if(userData.image !== undefined){
+    coverImage = userData.image;
   }
   // if(this.state.userData !== undefined){
   //   const encodedImage = new Buffer(userData.user_image, "binary").toString(
@@ -178,7 +186,7 @@ class Profile extends React.Component {
               <li class="nav-item">
                 <a
                   class="nav-link waves-effect"
-                  onClick={this.LogOut}
+                  onClick={this.logOut}
                   style={{ color: "black" }}
                 >
                   <i class="fas fa-sign-out-alt"></i>{" "}

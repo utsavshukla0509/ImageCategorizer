@@ -2,9 +2,14 @@ import React from "react";
 
 
 class LandingPage extends React.Component{
-    state = {
-        clicked : false,
-    } 
+    constructor(props){
+        super(props);
+        this.state = {
+            clicked : false,
+        };
+        this.handleClick = this.handleClick.bind(this);
+    }
+    
     handleClick = () =>{
         this.setState({clicked : true});
     }
@@ -23,9 +28,9 @@ class LandingPage extends React.Component{
                 <div class="container">
                     <div class="row wow fadeIn">
                     <div class="col-md-12 mb-4 white-text text-center text-md-left ">
-                        <h1 class="display-4 font-weight-bold ">PhotoCAT</h1>
+                        <h1 class="display-4 font-weight-bold ">ImageCAT</h1>
                         <p>
-                        <strong>A Unique Solution to Catogarize your Images.</strong>
+                        <strong>A Unique Solution to Categorize your Images.</strong>
                         </p>
                         <p class="mb-4 d-none d-md-block">
                         <strong>The most comprehensive tool for managing your Images, simplifying the task to sort through your Image Data.</strong>
