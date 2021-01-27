@@ -13,7 +13,7 @@ export const getImages = (label) => {
     try {
       // console.log("genre",genre);
       // if(genre === undefined){genre = "All";}
-      const result =  await Axios.get("/image/getimages/"+"/"+label, {
+      const result =  await Axios.get("/image/getimages/"+label, {
         headers: {
           'Authorization': `Beaver ${localStorage.getItem('name')}` 
         }
@@ -54,13 +54,13 @@ export const addImage = (img) => {
     try {
       const promise1 = await Axios.post("/image/addimage",formData, {
         headers: {
-          'Authorization': `Beaver ${localStorage.getItem('name')}` 
+          'Authorization': `Beaver ${localStorage.getItem('name')}`,
+          "content-type": "multipart/form-data" 
         }
       });
       const promise2 = await Axios.get("/label/getlabels/", {
         headers: {
-          'Authorization': `Beaver ${localStorage.getItem('name')}` ,
-          "content-type": "multipart/form-data"
+          'Authorization': `Beaver ${localStorage.getItem('name')}`
         }
       });
       

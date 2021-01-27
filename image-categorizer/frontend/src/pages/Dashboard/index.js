@@ -14,19 +14,25 @@ import {
 
 
 class Dashboard extends React.Component {
-  state = {
-    genres: [],
-    pageSize: 12,
-    currentPage: 1,
-    currentGenre: "all",
-    filteredGenres: [],
-    showOptions: false,
-    userInput: "",
-    isGenreDisplay: false,
-    toggleName: "all",
-    enableName : '',
-    
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      genres: [],
+      pageSize: 12,
+      currentPage: 1,
+      currentGenre: "all",
+      filteredGenres: [],
+      showOptions: false,
+      userInput: "",
+      isGenreDisplay: false,
+      toggleName: "all",
+      enableName : '',
+    };
+    this.handleDownload = this.handleDownload.bind(this);
+    this.onOpenGenre = this.onOpenGenre.bind(this);
+    this.showSearchList = this.showSearchList.bind(this);
+    this.changeSearchList = this.changeSearchList.bind(this);
+  }
 
   componentDidMount() {
     this.props.getGenres();
@@ -56,7 +62,7 @@ class Dashboard extends React.Component {
 
   };
 
-  showSearchList(){
+  showSearchList = () => {
     // e.preventDefault();
     const showOptions = this.state.showOptions;
     const userInput = this.state.userInput;

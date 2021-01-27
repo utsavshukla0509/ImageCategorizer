@@ -2,15 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 // import { downloadGenres, getGenres } from "../../actions/imageAction";
 class MultiDropDown extends React.Component{
-        
-    state = {
-            genreList : []
-
-    }
-        
+    constructor(props){
+        super(props);
+        this.state = {
+                genreList : []
+        }
+        this.onChangeCheck = this.onChangeCheck.bind(this);
+        this.handleDownload = this.handleDownload.bind(this);
+    }   
     componentDidMount(){
         // this.props.getGenres();
-        
     }
 
     onChangeCheck = (e) => {

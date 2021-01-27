@@ -26,11 +26,11 @@ class SignIn{
                     userInfo.userId = userData.rows[0].userid;
                     userInfo.username = userData.rows[0].username;
                     userInfo.email = userData.rows[0].email;
-                    const token = await this.userUtility.generateToken(userInfo);   
-                    return this.helper.writeResponse(null,{
+                    const token = await this.userUtility.generateToken(userInfo);
+                    userInfo.token = token;   
+                    return this.helper.writeResponse(null,  {
                         msg: "Authentication has been successful",
                         status : true,
-                        token : token,
                         userInfo
                     },res);                
                 }

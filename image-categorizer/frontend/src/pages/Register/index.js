@@ -4,16 +4,23 @@ import { connect } from "react-redux";
 import { getOTP, signUp } from "../../actions/authAction";
 
 class RegisterForm extends React.Component {
-  state = {
-    data: {
-      username: "",
-      email: "",
-      password: "",
-      otp: "",
-    },
-    errors: {},
-    authError: "",
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      data: {
+        username: "",
+        email: "",
+        password: "",
+        otp: "",
+      },
+      errors: {},
+      authError: "",
+    };
+    this.handleResend = this.handleResend.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleVerify = this.handleVerify.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
+  }
 
   validateProperty = (input) => {
     const { name, value } = input;

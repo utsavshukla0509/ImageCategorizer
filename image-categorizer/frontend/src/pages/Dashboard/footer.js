@@ -10,7 +10,7 @@ class Footer extends React.Component{
             <div className="pb-4">
             </div>
             <div className="footer-copyright py-3">
-            © 2019 Copyright:
+            © 2021 ImageCat
             {/* <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a> */}
             </div>
         </footer>
