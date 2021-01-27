@@ -6,13 +6,17 @@ import { connect } from "react-redux";
 import { signIn } from "../../actions/authAction";
 
 class Login extends React.Component {
-  state = {
-    data: {
-      email: "",
-      password: "",
-    },
-    errors: {},
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      data: {
+        email: "",
+        password: "",
+      },
+      errors: {},
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   schema = {
     email: Joi.string().email().required().label("Email"),

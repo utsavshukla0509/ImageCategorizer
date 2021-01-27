@@ -8,6 +8,14 @@ import {
     GET_OTP_ERROR,
     GET_USER_DETAIL_SUCCESS,
     GET_USER_DETAIL_ERROR,
+    PROFILE_UPDATE_SUCCESS,
+    PROFILE_UPDATE_ERROR,
+    UPLOAD_USER_IMAGE_SUCCESS,
+    UPLOAD_USER_IMAGE_ERROR,
+    FORGOT_UPDATE_SUCCESS,
+    FORGOT_UPDATE_ERROR,
+    FORGOT_VERIFY_SUCCESS,
+    FORGOT_VERIFY_ERROR,
   } from "../actions/actionTypes";
   
   const initState = {
@@ -24,7 +32,7 @@ import {
         return {
           ...state,
           loggedIn: action.payload.status,
-          userData: action.payload.data,
+          userData: action.payload.userInfo,
           authMessage: action.payload.msg,
         };
       case LOGIN_ERROR:
@@ -74,6 +82,57 @@ import {
         return {
           ...state,
           authMessage: action.error.response.data.msg,
+        };
+
+        case PROFILE_UPDATE_SUCCESS:
+      return {
+        ...state,
+        authMessage: action.payload.msg,
+      };
+
+    case PROFILE_UPDATE_ERROR:
+      return {
+        ...state,
+        authMessage: action.error.response.data.error,
+      };
+
+    case UPLOAD_USER_IMAGE_SUCCESS:
+      return {
+        ...state,
+        userData: action.payload.userInfo,
+        authMessage: action.payload.msg,
+      };
+    case UPLOAD_USER_IMAGE_ERROR:
+      return {
+        ...state,
+        authMessage: action.error,
+      };
+
+      case FORGOT_VERIFY_SUCCESS:
+        return {
+          ...state,
+          status : action.payload.status,
+          authMessage: action.payload.msg,
+        };
+  
+      case FORGOT_VERIFY_ERROR:
+        return {
+          ...state,
+          authMessage: action.error.response.data.error,
+        };
+
+        case FORGOT_UPDATE_SUCCESS:
+        return {
+          ...state,
+          isVerify : action.payload.verified,
+          status : action.payload.code === "1" ? false : true,
+          authMessage: action.payload.msg,
+        };
+  
+      case FORGOT_UPDATE_ERROR:
+        return {
+          ...state,
+          authMessage: action.error.response.data.error,
         };
   
       default:
