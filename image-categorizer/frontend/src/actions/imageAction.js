@@ -2,6 +2,7 @@ import Axios from "axios";
 import { 
   GET_IMAGES_SUCCESS, GET_IMAGES_ERROR,
   GET_GENRES_SUCCESS, GET_GENRES_ERROR,
+  DOWNLOAD_GENRES_SUCCESS,DOWNLOAD_GENRES_ERROR,
   DELETE_IMAGE_SUCCESS,DELETE_IMAGE_ERROR,
   SHOW_LOADER,HIDE_LOADER,
   SHOW_PAGE_LOADER,HIDE_PAGE_LOADER,
@@ -76,6 +77,24 @@ export const addImage = (img) => {
 
     } catch (error) {
       dispatch({ type: GET_IMAGES_ERROR, error });
+    }
+  };
+};
+
+export const downloadLabels = (genreList) => {
+  return async (dispatch) => {
+    try {
+      // console.log("genreList",genreList);
+      const result = await Axios.get("/label/downloadimages/" + genreList,{
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('name')}` 
+        }
+      });
+      console.log("multiplegenres");
+      console.log(result); 
+      // dispatch({ type: DOWNLOAD_GENRES_SUCCESS, payload: result.data });
+    } catch (error) {
+      dispatch({ type: DOWNLOAD_GENRES_ERROR, error });
     }
   };
 };

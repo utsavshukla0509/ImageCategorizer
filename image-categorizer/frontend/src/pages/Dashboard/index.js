@@ -5,11 +5,10 @@ import Footer from "./footer";
 import _ from "lodash";
 import { ImageTable, Pagination } from "../../components";
 // import { ListGroup } from "../../components/common";
-import { getImages } from "../../actions/imageAction";
+import { getImages,downloadLabels, } from "../../actions/imageAction";
 import {
   getGenres,
   getAllGenres,
-  downloadGenres,
 } from "../../actions/genreAction";
 
 
@@ -101,8 +100,8 @@ class Dashboard extends React.Component {
     // console.log(e.target.value);
      e.preventDefault();
     if (e.target.value === "") {
-      this.setState({ currentGenre: "All", currentPage: 1 });
-      this.props.getImages("All");
+      this.setState({ currentGenre: "all", currentPage: 1 });
+      this.props.getImages("all");
 
       this.setState({
         filteredGenres: [],
@@ -145,9 +144,7 @@ class Dashboard extends React.Component {
 
     let DownloadGenreList = [];
     DownloadGenreList.push(this.state.toggleName);
-
-    // console.log(DownloadGenreList);
-    this.props.downloadGenres(DownloadGenreList);
+    this.props.downloadLabels(DownloadGenreList);
 
     alert("downloading... Please wait");
   };
@@ -458,7 +455,7 @@ const mapDispatchToProps = (dispatch) => {
     getImages: (label) => dispatch(getImages(label)),
     getGenres: () => dispatch(getGenres()),
     getAllGenres: () => dispatch(getAllGenres()),
-    // downloadGenres: (genre_list) => dispatch(downloadGenres(genre_list)),
+    downloadLabels: (genreList) => dispatch(downloadLabels(genreList)),
   };
 };
 
