@@ -48,10 +48,12 @@ container.register('getImagesApi', asClass(require("../controller/image/getImage
 //Label
 container.register('getLabelsApi', asClass(require("../controller/label/getLabels"), getScope()));
 container.register('getSortedLabelsApi', asClass(require("../controller/label/getSortedLabels"), getScope()));
+container.register('downloadImagesApi', asClass(require("../controller/label/downloadImages"), getScope()));
 
 //Utility
 container.register('userUtility', asClass(require("../utilities/userUtility"), getScope()));
 container.register('imageUtility', asClass(require("../utilities/imageUtility"), getScope()));
+container.register('labelUtility', asClass(require("../utilities/labelUtility"), getScope()));
 container.register('helper', asClass(require("../utilities/helper"), getScope()));
 
 

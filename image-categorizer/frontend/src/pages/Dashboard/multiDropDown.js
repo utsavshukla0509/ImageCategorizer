@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { downloadGenres, getGenres } from "../../actions/imageAction";
+import { downloadLabels} from "../../actions/imageAction";
 class MultiDropDown extends React.Component{
     constructor(props){
         super(props);
@@ -47,7 +47,7 @@ class MultiDropDown extends React.Component{
             }
         }
         // console.log(DownloadGenreList);
-        this.props.downloadGenres(DownloadGenreList);
+        this.props.downloadLabels(DownloadGenreList);
 
         alert("downloading... Please wait");
     }
@@ -95,7 +95,7 @@ class MultiDropDown extends React.Component{
 const mapDispatchToProps = (dispatch) => {
     return {
       getGenres: () => dispatch(getGenres()),
-      downloadGenres : (genre_list) => dispatch(downloadGenres(genre_list))
+      downloadLabels : (genreList) => dispatch(downloadLabels(genreList))
     };
   };
 

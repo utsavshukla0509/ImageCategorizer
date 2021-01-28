@@ -12,6 +12,10 @@ router.get("/getsortedlabels",checkAuth,(req,res,next) => {
     req.container.resolve('getSortedLabelsApi').handleRequest(req,res).catch(next);
 });
 
+router.get("/downloadimages/:labels",checkAuth,(req,res,next) => {
+    req.container.resolve('downloadImagesApi').handleRequest(req,res).catch(next);
+});
+
 
 
 module.exports = router;

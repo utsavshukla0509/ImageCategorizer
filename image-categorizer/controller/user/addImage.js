@@ -23,7 +23,7 @@ class addImage {
         userInfo.email = email;
         userInfo.image = cloudinaryResult;
 
-        return this.helper.writeResponse(null,{userInfo},res);
+        return this.helper.writeResponse(null,{userInfo,"msg" : "Profile Updated"},res);
       }
       catch(error){
         console.log(error);
