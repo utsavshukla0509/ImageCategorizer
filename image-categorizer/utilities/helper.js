@@ -9,10 +9,10 @@ class Helper {
             err.code = err.code || 500;
             console.log('req has been sent with status:', err.code);
             if(info){
-                return res.status(err.code).json({"msg": err.msg,"status" : info.status});
+                return res.status(err.code).json({"msg": err.msg,"info" : err.data,"status" : info.status});
             }
             else{
-                return res.status(err.code).json({message: err.msg || 'internal server error'});
+                return res.status(err.code).json({msg: err.msg,"info" : err.data || 'internal server error'});
             }
         } else{
             console.log('req has been sent with status: 200');

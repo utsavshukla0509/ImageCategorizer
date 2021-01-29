@@ -42,6 +42,18 @@ class Header extends React.Component {
         <nav className="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
           
           <div className="container-fluid">
+            {
+              userData && userData.username ?
+              <p style = {{
+                color : "#2196f3",
+                width : "40%",
+                marginTop : "20px",
+                fontWeight : "600",
+                fontSize : "110%"
+              }}>Hi, {userData.username[0].toUpperCase() + userData.username.slice(1)}</p>
+              :
+              <></>
+            }
             <button
               className="navbar-toggler"
               type="button"
