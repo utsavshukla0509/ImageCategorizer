@@ -95,7 +95,7 @@ import {
     case PROFILE_UPDATE_ERROR:
       return {
         ...state,
-        authMessage: action.error.response.data.error,
+        authMessage: action.error.response.data.msg,
       };
 
     case UPLOAD_USER_IMAGE_SUCCESS:
@@ -107,7 +107,7 @@ import {
     case UPLOAD_USER_IMAGE_ERROR:
       return {
         ...state,
-        authMessage: action.error,
+        authMessage: action.error.response.data.msg,
       };
 
       case DELETE_USER_IMAGE_SUCCESS:
@@ -118,7 +118,7 @@ import {
     case DELETE_USER_IMAGE_ERROR:
       return {
         ...state,
-        authMessage: action.error,
+        authMessage: action.error.response.data.msg,
       };
 
       case FORGOT_VERIFY_SUCCESS:
@@ -131,7 +131,7 @@ import {
       case FORGOT_VERIFY_ERROR:
         return {
           ...state,
-          authMessage: action.error.response.data.error,
+          authMessage: action.error.response.data.msg,
         };
 
         case FORGOT_UPDATE_SUCCESS:
@@ -145,7 +145,7 @@ import {
       case FORGOT_UPDATE_ERROR:
         return {
           ...state,
-          authMessage: action.error.response.data.error,
+          authMessage: action.error.response.data.msg,
         };
   
       default:

@@ -3,7 +3,7 @@ import Joi from "@hapi/joi";
 import "./style.css";
 import { connect } from "react-redux";
 import { getOTP, 
-    updateandVerify ,
+    updateAndVerify ,
     userDetail,
     addUserImage,
     signOut,
@@ -23,7 +23,6 @@ class Profile extends React.Component {
         currentpassword: "",
       },
       errors: {},
-      isVerify: false,
       // visible:false
     };
     this.logOut = this.logOut.bind(this);
@@ -82,30 +81,29 @@ class Profile extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-      console.log(e);
+      // console.log(e);
       if(this.state.data.email !== ""){
-        this.setState({isVerify : true});
         this.props.getOTP(this.state.data.email);
       }
       else{
         // console.log("ehrbfuehbf");
         const {username, password, email,currentpassword ,otp} = this.state.data;
-        this.props.updateandVerify({username, email, password,currentpassword ,otp});
+        this.props.updateAndVerify({username, email, password,currentpassword ,otp});
       }
-      let data = {...this.state.data};
-      data.username = "";
-      data.email = "";
-      data.otp = "";
-      data.password = "";
-      data.currentpassword = "";
-      this.setState({data : data})
+      // let data = {...this.state.data};
+      // data.username = "";
+      // data.email = "";
+      // data.otp = "";
+      // data.password = "";
+      // data.currentpassword = "";
+      // this.setState({data : data})
     };
 
   handleVerify = (e) =>{
     e.preventDefault();
     // console.log(this.state.data,"verfiy");
-    const { username, password, email, otp } = this.state.data;
-    this.props.updateandVerify({ username, email, password, otp });
+    const { username, password, currentpassword, email, otp } = this.state.data;
+    this.props.updateAndVerify({ username, email, password,currentpassword, otp });
   };
 
   handleResend = (e) => {
@@ -120,7 +118,6 @@ class Profile extends React.Component {
 
   handleDelete = (e) => {
     e.preventDefault();
-    console.log("hi");
     this.props.deleteUserImage();
   }
 
@@ -136,7 +133,7 @@ class Profile extends React.Component {
 
   render() {
 
-    const { authMessage,userData} = this.props;
+    const { authMessage,userData,isVerify} = this.props;
     const { username, email,otp,password,currentpassword} = this.state.data;
     const {errors} = this.state;
     if(localStorage.getItem('loggedIn') === 'false'){
@@ -145,7 +142,7 @@ class Profile extends React.Component {
 
   let coverImage = "https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg";
 
-  if(userData.image !== undefined && userData.image !== ""){
+  if(userData && userData.image !== undefined && userData.image !== ""){
     coverImage = userData.image;
   }
   
@@ -263,7 +260,6 @@ class Profile extends React.Component {
                               error={errors["username"]}
                               onChange={this.handleChange}
                               value={username}
-                              // value = {username}
                             />
                             <label for="orangeForm-name">Your name</label>
                             {errors["username"] && (
@@ -280,7 +276,6 @@ class Profile extends React.Component {
                               class="form-control"
                               type="email"
                               onChange={this.handleChange}
-                              //value = {email}
                               value={email}
                             />
                             <label for="orangeForm-email">Your email</label>
@@ -292,7 +287,7 @@ class Profile extends React.Component {
                         )}
                           </div>
 
-                          {this.state.isVerify ? (
+                          {isVerify ? (
                             <div class="md-form">
                               <i class="fas fa-key prefix set_icon"></i>
                               <input
@@ -315,7 +310,7 @@ class Profile extends React.Component {
                           ) : (
                             <> </>
                           )} */}
-                          {this.state.isVerify ? (
+                          {isVerify ? (
                             <div style={{ display: "flex" }}>
                               <div class="text-center">
                                 <button
@@ -417,12 +412,13 @@ const mapStateToProps = (state) => {
     authMessage: state.auth.authMessage,
     userData: state.auth.userData,
     loggedIn: state.auth.loggedIn,
+    isVerify : state.auth.isVerify
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     userDetail: () => dispatch(userDetail()),
-    updateandVerify: (creds) => dispatch(updateandVerify(creds)),
+    updateAndVerify: (creds) => dispatch(updateAndVerify(creds)),
     getOTP: (email) => dispatch(getOTP(email)),
     signOut: () => dispatch(signOut()),
     addUserImage: (image) => dispatch(addUserImage(image)),
