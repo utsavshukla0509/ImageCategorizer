@@ -1,6 +1,6 @@
 
 
-class addImage {
+class AddImage {
     constructor(userRepo, imageLabelRepo, helper, imageUtility){
         this.userRepo = userRepo;
         this.helper = helper;
@@ -32,4 +32,4 @@ class addImage {
   }
 };
 
-module.exports = addImage;
+module.exports = AddImage;

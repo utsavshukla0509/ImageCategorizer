@@ -31,8 +31,12 @@ router.get("/getdetail",checkAuth,(req,res,next) => {
     req.container.resolve('userDetailApi').handleRequest(req,res).catch(next);
 });
 
-router.put("/addimage",checkAuth,upload.single('image'), (req,res) => {
-    req.container.resolve('addUserImageApi').handleRequest(req,res);
+router.put("/addimage",checkAuth,upload.single('image'), (req,res,next) => {
+    req.container.resolve('addUserImageApi').handleRequest(req,res).catch(next);
+});
+
+router.patch("/deleteimage",checkAuth, (req,res,next) => {
+    req.container.resolve('deleteUserImageApi').handleRequest(req,res).catch(next);
 });
 
 
