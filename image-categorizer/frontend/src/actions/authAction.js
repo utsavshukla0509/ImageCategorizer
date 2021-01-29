@@ -12,6 +12,8 @@ import {
     UPLOAD_USER_IMAGE_ERROR,
     DELETE_USER_IMAGE_SUCCESS,
     DELETE_USER_IMAGE_ERROR,
+    PROFILE_UPDATE_SUCCESS,
+    PROFILE_UPDATE_ERROR,
     FORGOT_VERIFY_SUCCESS,
     FORGOT_VERIFY_ERROR,
     FORGOT_UPDATE_SUCCESS,
@@ -121,13 +123,6 @@ export const deleteUserImage = () => {
 
   return async (dispatch) => {
     try {
-      // console.log(localStorage.getItem('name'));
-      // const result = await Axios.patch("/user/deleteimage",{
-      //     headers: {
-      //       'Authorization': `Beaver ${localStorage.getItem('name')}`
-      //     }
-      //   });
-
         const result = await axios(                                                                                                                                                                                                                                                   
           {                                                                                                                                                                                                                                                        
           method:'patch',                                                                                                                                                                                                                                          
@@ -149,17 +144,21 @@ export const deleteUserImage = () => {
 
 
 
-export const updateandVerify = (credentials) => {
+export const updateAndVerify = (credentials) => {
   return async (dispatch) => {
     try {
       // console.log("credentials");
       // console.log(credentials);
-      credentials.user_id = localStorage.getItem("name");
-      const result = await Axios.put("/user/updateandverify", credentials);
+      const result = await Axios.patch("/user/updateandverify", credentials,{
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('name')}`
+        }
+      });
       // console.log("helle");
       // console.log(result);
       dispatch({ type: PROFILE_UPDATE_SUCCESS, payload: result.data});
     } catch (error) {
+      // console.log(error.response.data);
       dispatch({ type: PROFILE_UPDATE_ERROR, error });
     }
   };
@@ -169,8 +168,12 @@ export const updateandVerify = (credentials) => {
 export const forgotandverify = (email) => {
   return async (dispatch) => {
     try {
-      const result = await Axios.post("/user/forgotandverify", {"email" : email,});
-      // console.log("helle");
+      const result = await Axios.post("/user/forgotandverify", {"email" : email,},{
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('name')}`
+        }
+      });
+      // console.log("forgotandverify");
       // console.log(result);
       dispatch({ type: FORGOT_VERIFY_SUCCESS, payload: result.data});
     } catch (error) {
@@ -182,11 +185,13 @@ export const forgotandverify = (email) => {
 export const forgotandupdate = (credentials) => {
   return async (dispatch) => {
     try {
-      // console.log("credentials");
-      // console.log(credentials);
-      credentials.user_id = localStorage.getItem("name");
-      const result = await Axios.put("/user/forgotandupdate", credentials);
-      // console.log("helle");
+      
+      const result = await Axios.patch("/user/forgotandupdate", credentials,{
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('name')}`
+        }
+      });
+      // console.log("forgotandupdate");
       // console.log(result);
       dispatch({ type: FORGOT_UPDATE_SUCCESS, payload: result.data});
     } catch (error) {

@@ -39,5 +39,17 @@ router.patch("/deleteimage",checkAuth, (req,res,next) => {
     req.container.resolve('deleteUserImageApi').handleRequest(req,res).catch(next);
 });
 
+router.patch("/updateandverify",checkAuth,(req,res,next) => {
+    req.container.resolve('updateDetailApi').handleRequest(req,res).catch(next);
+});
+
+router.post("/forgotandverify",checkAuth,(req,res,next) => {
+    req.container.resolve('forgotVerifyApi').handleRequest(req,res).catch(next);
+});
+
+router.patch("/forgotandupdate",checkAuth,(req,res,next) => {
+    req.container.resolve('forgotUpdateApi').handleRequest(req,res).catch(next);
+});
+
 
 module.exports = router;

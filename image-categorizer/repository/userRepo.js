@@ -27,6 +27,24 @@ constructor(postgresClient) {
         return this.postgresClient.query(query);
     }
 
+    async updateDetail(userId,obj){
+
+        const query = `UPDATE public.userinfo 
+            SET username = '${obj.username}',
+                email = '${obj.email}',
+                password = '${obj.password}'
+            WHERE userid = ${userId}`;
+        return this.postgresClient.query(query);
+    }
+
+    async updateDetailByEmail(email,password){
+
+        const query = `UPDATE public.userinfo 
+            SET password = '${password}'
+            WHERE email = '${email}'`;
+        return this.postgresClient.query(query);
+    }
+
     
 }
 
