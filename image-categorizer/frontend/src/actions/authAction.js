@@ -10,12 +10,15 @@ import {
     GET_USER_DETAIL_ERROR,
     UPLOAD_USER_IMAGE_SUCCESS,
     UPLOAD_USER_IMAGE_ERROR,
+    DELETE_USER_IMAGE_SUCCESS,
+    DELETE_USER_IMAGE_ERROR,
     FORGOT_VERIFY_SUCCESS,
     FORGOT_VERIFY_ERROR,
     FORGOT_UPDATE_SUCCESS,
     FORGOT_UPDATE_ERROR,
   } from "./actionTypes";
   import Axios from "axios";
+import axios from "axios";
 
 
   export const signIn = (credentials) => {
@@ -113,6 +116,38 @@ export const addUserImage = (image) => {
     }
   };
 };
+
+export const deleteUserImage = () => {
+
+  return async (dispatch) => {
+    try {
+      // console.log(localStorage.getItem('name'));
+      // const result = await Axios.patch("/user/deleteimage",{
+      //     headers: {
+      //       'Authorization': `Beaver ${localStorage.getItem('name')}`
+      //     }
+      //   });
+
+        const result = await axios(                                                                                                                                                                                                                                                   
+          {                                                                                                                                                                                                                                                        
+          method:'patch',                                                                                                                                                                                                                                          
+          url:`http://localhost:8000/user/deleteimage`,                                                                                                                                                                                                          
+          headers:{                                                                                                                                                                                                                                              
+          Authorization: `Beaver ${localStorage.getItem('name')}` || null,                                                                                                                                                                                                           
+          }                                                                                                                                                                                                                                                      
+          });  
+
+      // console.log("come");
+      // console.log(result);
+      dispatch({ type: DELETE_USER_IMAGE_SUCCESS, payload: result.data});
+    } catch (error) {
+      dispatch({ type: DELETE_USER_IMAGE_ERROR, error });
+    }
+  };
+};
+
+
+
 
 export const updateandVerify = (credentials) => {
   return async (dispatch) => {

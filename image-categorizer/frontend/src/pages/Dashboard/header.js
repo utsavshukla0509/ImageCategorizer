@@ -29,8 +29,8 @@ class Header extends React.Component {
     const { authMessage, userData } = this.props;
     // console.log("user",userData);
     let coverImage = img;
-    if(userData.user_image !== undefined){
-      coverImage = userData.user_image;
+    if(userData.image !== undefined && userData.image !== ""){
+      coverImage = userData.image;
     }
 
     if (!this.state.logout_status) {

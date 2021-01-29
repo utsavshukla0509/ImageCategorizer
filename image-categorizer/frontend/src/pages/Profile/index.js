@@ -1,11 +1,13 @@
 import React from "react";
 import Joi from "@hapi/joi";
+import "./style.css";
 import { connect } from "react-redux";
 import { getOTP, 
     updateandVerify ,
     userDetail,
     addUserImage,
-    signOut
+    signOut,
+    deleteUserImage
 } from "../../actions/authAction";
 import { Redirect } from 'react-router-dom';
 
@@ -29,6 +31,7 @@ class Profile extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleResend = this.handleResend.bind(this);
     this.handleUpload = this.handleUpload.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -115,6 +118,12 @@ class Profile extends React.Component {
     this.props.addUserImage(e.target.files[0]);
   };
 
+  handleDelete = (e) => {
+    e.preventDefault();
+    console.log("hi");
+    this.props.deleteUserImage();
+  }
+
   schema = {
     username: Joi.string().alphanum().min(3).max(30),
     email: Joi.string().email().required().label("Email"),
@@ -130,25 +139,15 @@ class Profile extends React.Component {
     const { authMessage,userData} = this.props;
     const { username, email,otp,password,currentpassword} = this.state.data;
     const {errors} = this.state;
-    // console.log("username",userData);
     if(localStorage.getItem('loggedIn') === 'false'){
       return <Redirect to = {"/login"} />
     }
 
-
   let coverImage = "https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg";
-  // console.log(userData.username,userData.email);
 
-  if(userData.image !== undefined){
+  if(userData.image !== undefined && userData.image !== ""){
     coverImage = userData.image;
   }
-  // if(this.state.userData !== undefined){
-  //   const encodedImage = new Buffer(userData.user_image, "binary").toString(
-  //     "base64"
-  //   );
-  //   coverImage = "data:image/jpeg;base64," + encodedImage;
-  // }
-
   
 
     return (
@@ -161,9 +160,8 @@ class Profile extends React.Component {
           {
             authMessage 
             ? 
-            (<p className={this.state.visible?' fadeIn':' fadeOut'}> {authMessage}</p>)
+            (<p className={"fade-out"}> {authMessage}</p>)
             
-            // alert(authMessage)
             : 
               (<> </>)
           }
@@ -236,7 +234,9 @@ class Profile extends React.Component {
                         </a>
 
                         {/* <button className="btn btn-info btn-rounded btn-sm">Upload New Photo</button><br/> */}
-                        {/* <button className="btn btn-danger btn-rounded btn-sm">Delete</button> */}
+                        <button className="btn btn-danger btn-rounded btn-sm"
+                        onClick = {this.handleDelete}
+                        >Delete</button>
                       </div>
                     </div>
                   </div>
@@ -291,21 +291,6 @@ class Profile extends React.Component {
                           </div>
                         )}
                           </div>
-
-                          {/* <div class="md-form">
-                                    
-                                    <input
-                                    name="password"
-                                    id="orangeForm-pass" 
-                                    className="form-control"
-                                    type="password"
-                                    error={errors["password"]}
-                                    onChange={this.handleChange}
-                                    // label="password"
-                                    value = {password}
-                                    />
-                                    <label htmlFor="orangeForm-pass">Your password</label>
-                                </div> */}
 
                           {this.state.isVerify ? (
                             <div class="md-form">
@@ -441,6 +426,7 @@ const mapDispatchToProps = (dispatch) => {
     getOTP: (email) => dispatch(getOTP(email)),
     signOut: () => dispatch(signOut()),
     addUserImage: (image) => dispatch(addUserImage(image)),
+    deleteUserImage : () => dispatch(deleteUserImage())
   };
 };
 

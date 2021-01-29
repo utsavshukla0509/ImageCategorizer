@@ -40,6 +40,7 @@ container.register('signInApi', asClass(require("../controller/user/signIn"), ge
 container.register('signUpApi', asClass(require("../controller/user/signUp"), getScope()));
 container.register('generateOTPApi', asClass(require("../controller/user/generateOTP"), getScope()));
 container.register('addUserImageApi', asClass(require("../controller/user/addImage"), getScope()));
+container.register('deleteUserImageApi', asClass(require("../controller/user/deleteImage"), getScope()));
 
 //Image
 container.register('addImageApi', asClass(require("../controller/image/addImage"), getScope()));

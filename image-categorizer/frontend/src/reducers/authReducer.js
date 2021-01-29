@@ -12,6 +12,8 @@ import {
     PROFILE_UPDATE_ERROR,
     UPLOAD_USER_IMAGE_SUCCESS,
     UPLOAD_USER_IMAGE_ERROR,
+    DELETE_USER_IMAGE_SUCCESS,
+    DELETE_USER_IMAGE_ERROR,
     FORGOT_UPDATE_SUCCESS,
     FORGOT_UPDATE_ERROR,
     FORGOT_VERIFY_SUCCESS,
@@ -103,6 +105,17 @@ import {
         authMessage: action.payload.msg,
       };
     case UPLOAD_USER_IMAGE_ERROR:
+      return {
+        ...state,
+        authMessage: action.error,
+      };
+
+      case DELETE_USER_IMAGE_SUCCESS:
+      return {
+        ...state,
+        authMessage: action.payload.msg,
+      };
+    case DELETE_USER_IMAGE_ERROR:
       return {
         ...state,
         authMessage: action.error,
