@@ -85,21 +85,6 @@ class RegisterForm extends React.Component {
     otp: this.props.isVerify === false ? "" : Joi.string().min(6).max(6),
   };
 
-  // saveUserDetais(user, loggedIn, authMessage) {
-  //   if (authMessage !== "" && authMessage !== undefined) {
-  //     return;
-  //   }
-  //   if (user.userInfo === undefined) {
-  //     return;
-  //   }
-  //   if (loggedIn) {
-  //     localStorage.setItem("loggedIn", true);
-  //     if (localStorage.getItem("loggedIn") === "true") {
-  //       localStorage.setItem("name", user.userInfo.userid);
-  //     }
-  //   }
-  // }
-
   render() {
     // if (this.props.status === true && this.state.isVerify === false) {
     //   this.setState({ isVerify: true });
