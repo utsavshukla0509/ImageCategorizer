@@ -33,7 +33,7 @@ class Header extends React.Component {
     const { authMessage, userData ,active,onOption} = this.props;
     // console.log("user",this.props);
     let coverImage = img;
-    if(userData.image !== undefined && userData.image !== ""){
+    if(userData && userData.image !== undefined && userData.image !== "" && userData.image !== null){
       coverImage = userData.image;
     }
 
@@ -131,9 +131,9 @@ class Header extends React.Component {
               className = {"list-group-item waves-effect" + this.checkClass("label",active)}>
               <i className="far fa-images mr-3"></i>Label</a>
             <a href="#" 
-              onClick = {()=>{onOption("time")}} 
-              className = {"list-group-item waves-effect" + this.checkClass("time",active)}>
-              <i className="fas fa-clock mr-3"></i>Date & Time</a>
+              onClick = {()=>{onOption("date")}} 
+              className = {"list-group-item waves-effect" + this.checkClass("date",active)}>
+              <i className="fas fa-clock mr-3"></i>Date</a>
           </div>
         </div>
       </header>
