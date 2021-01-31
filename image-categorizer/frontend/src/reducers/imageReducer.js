@@ -3,10 +3,12 @@ import { GET_IMAGES_SUCCESS, GET_IMAGES_ERROR,
     SHOW_LOADER, HIDE_LOADER,
     SHOW_PAGE_LOADER, HIDE_PAGE_LOADER,
     DELETE_IMAGE_SUCCESS,DELETE_IMAGE_ERROR,
+    GET_IMAGES_BY_DATE_SUCCESS,GET_IMAGES_BY_DATE_ERROR
   } from "../actions/actionTypes";
   
   const initialState = {
     images : [],
+    imagesByDate : [],
     error : null,
     loading : false,
     loadingPage : false
@@ -70,6 +72,19 @@ import { GET_IMAGES_SUCCESS, GET_IMAGES_ERROR,
       case DELETE_IMAGE_ERROR:
         return {
           ...state,
+          error: action.error,
+        };
+
+        case GET_IMAGES_BY_DATE_SUCCESS:
+        return {
+          ...state,
+          imagesByDate: action.payload,
+        };
+
+        case GET_IMAGES_BY_DATE_ERROR:
+        return {
+          ...state,
+          imagesByDate : [],
           error: action.error,
         };
   

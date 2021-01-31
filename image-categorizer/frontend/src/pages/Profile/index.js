@@ -141,8 +141,8 @@ class Profile extends React.Component {
     }
 
   let coverImage = "https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg";
-
-  if(userData && userData.image !== undefined && userData.image !== ""){
+    console.log(userData);
+  if(userData && userData.image !== undefined && userData.image !== "" && userData.image !== null){
     coverImage = userData.image;
   }
   
