@@ -6,6 +6,7 @@ import {
   DELETE_IMAGE_SUCCESS,DELETE_IMAGE_ERROR,
   SHOW_LOADER,HIDE_LOADER,
   SHOW_PAGE_LOADER,HIDE_PAGE_LOADER,
+  GET_IMAGES_BY_DATE_SUCCESS,GET_IMAGES_BY_DATE_ERROR
 } from "./actionTypes";
 
 export const getImages = (label) => {
@@ -135,5 +136,32 @@ export const hidePageLoader = () => dispatch => {
   dispatch({
     type : HIDE_PAGE_LOADER
   })
+};
+
+export const getImagesByDate = (date) => {
+  return async (dispatch) => {
+    dispatch({type : SHOW_PAGE_LOADER});
+    try {
+      console.log("date",date);
+      if(date === null){date = "";}
+      // if(genre === undefined){genre = "All";}
+      const result =  await Axios.get("/image/getimagesbydate/"+date, {
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('name')}` 
+        }
+      });
+      // console.log("multiple");
+      // console.log(result);
+      if(result.data.length === 0){
+        dispatch({type : HIDE_PAGE_LOADER});
+      }
+      else{
+        dispatch({type : HIDE_PAGE_LOADER});
+        dispatch({ type: GET_IMAGES_BY_DATE_SUCCESS, payload: result.data});
+      }
+    } catch (error) {
+      dispatch({ type: GET_IMAGES_BY_DATE_ERROR, error });
+    }
+  };
 };
 

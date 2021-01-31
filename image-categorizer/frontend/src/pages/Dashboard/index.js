@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Header from "./header";
 import Footer from "./footer";
 import FilterByLabel from "./filterByLabel";
-import FilterByTime from "./filterByTime";
+import FilterByDate from "./filterByDate";
 // import _ from "lodash";
 // import { ImageTable, Pagination } from "../../components";
 // import { ListGroup } from "../../components/common";
@@ -28,7 +28,11 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    if (!localStorage.getItem('loggedIn')) this.props.history.push("/login");
+    // console.log(localStorage.getItem('name'));
+    if (localStorage.getItem('loggedIn') === false || 
+      localStorage.getItem('name') === "" || 
+    localStorage.getItem('name') === null || 
+    localStorage.getItem('name') === undefined) this.props.history.push("/login");
     const {currentOption} = this.state;
     
     return (
@@ -42,7 +46,7 @@ class Dashboard extends React.Component {
         currentOption === "label" ? <FilterByLabel/> : <></>
       }
       {
-        currentOption === "time" ? <FilterByTime/> : <></>
+        currentOption === "date" ? <FilterByDate/> : <></>
       }
         <Footer />
       </div>
