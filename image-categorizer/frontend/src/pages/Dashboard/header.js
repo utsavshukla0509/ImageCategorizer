@@ -25,9 +25,13 @@ class Header extends React.Component {
     this.props.signOut();
   };
 
+   checkClass(opt, active) {
+    return opt === active ? ' active' : '';
+  }
+
   render() {
-    const { authMessage, userData } = this.props;
-    // console.log("user",userData);
+    const { authMessage, userData ,active,onOption} = this.props;
+    // console.log("user",this.props);
     let coverImage = img;
     if(userData.image !== undefined && userData.image !== ""){
       coverImage = userData.image;
@@ -123,11 +127,13 @@ class Header extends React.Component {
             </h2>
           </a>
           <div className="list-group list-group-flush">
-            <a href="#" className="list-group-item active waves-effect">
-              <i className="far fa-images mr-3"></i>Photos
-            </a>
-            {/* <a href="http://localhost:3000/profile" className="list-group-item list-group-item-action waves-effect">
-                        <i className="fas fa-user mr-3"></i>Profile</a> */}
+            <a href="#" onClick = {()=>{onOption("label")}} 
+              className = {"list-group-item waves-effect" + this.checkClass("label",active)}>
+              <i className="far fa-images mr-3"></i>Label</a>
+            <a href="#" 
+              onClick = {()=>{onOption("time")}} 
+              className = {"list-group-item waves-effect" + this.checkClass("time",active)}>
+              <i className="fas fa-clock mr-3"></i>Date & Time</a>
           </div>
         </div>
       </header>
