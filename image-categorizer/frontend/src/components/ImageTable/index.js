@@ -17,6 +17,7 @@ export default function ImageTable({ images, currentPage, pageSize, genre ,onDel
    
      
       <div class="mdb-lightbox ">
+        
         {!!images &&
           currentImages.map((img) => {
             const coverImage = img.image;
@@ -36,7 +37,6 @@ export default function ImageTable({ images, currentPage, pageSize, genre ,onDel
           })}
       </div>
      
-       
-   
+
   );
 }
