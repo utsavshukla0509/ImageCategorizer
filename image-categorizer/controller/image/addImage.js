@@ -16,7 +16,7 @@ class AddImage {
         if(!userId) {
             return this.helper.writeResponse({msg : "missing userId" ,code : 404},null,res);
         }
-
+        
         let promise = [];
         req.files.forEach(async (image)=>{
           promise.push(this.imageUtility.processImage(userId,image)

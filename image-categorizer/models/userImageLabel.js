@@ -6,6 +6,7 @@ const userImageLabelTable = `CREATE TABLE ${tableName} (
 userId INTEGER NOT NULL,
 imageId INTEGER NOT NULL,
 label VARCHAR(20) NOT NULL,
+date DATE NOT NULL,
 PRIMARY KEY (imageId, label)
 );`;
 
