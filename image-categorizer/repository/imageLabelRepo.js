@@ -7,8 +7,8 @@ class ImageLabelRepo {
         this.postgresClient = postgresClient;
     }
     
-    async createImageLabel(userid,imageid,label){
-        const query = `INSERT INTO public.userimagelabel ("userid","imageid","label") VALUES ('${userid}','${imageid}','${label}');`;
+    async createImageLabel(userid,imageid,label,newDate){
+        const query = `INSERT INTO public.userimagelabel ("userid","imageid","label","date") VALUES ('${userid}','${imageid}','${label}','${newDate}');`;
         return this.postgresClient.query(query);
     }
 
@@ -28,6 +28,12 @@ class ImageLabelRepo {
             WHERE userid = ${userid}
             GROUP BY label
             ORDER BY COUNT(label) DESC;`;
+        return this.postgresClient.query(query);
+    }
+
+    async getImagesByDate(userid,date){
+        const query = `SELECT image FROM public.userimage WHERE imageid IN 
+        (SELECT imageid FROM public.userimagelabel WHERE userid = ${userid} AND date = '${date}' );`;
         return this.postgresClient.query(query);
     }
 

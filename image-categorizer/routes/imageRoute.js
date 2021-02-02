@@ -24,4 +24,8 @@ router.get("/getimages/:label",checkAuth,(req,res,next) => {
     req.container.resolve('getImagesApi').handleRequest(req,res).catch(next);
 });
 
+router.get("/getimagesbydate/:date",checkAuth,(req,res,next) => {
+    req.container.resolve('getImagesByDateApi').handleRequest(req,res).catch(next);
+});
+
 module.exports = router;
