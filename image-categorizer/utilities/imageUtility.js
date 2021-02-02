@@ -2,7 +2,7 @@ var fs = require('fs');
 const Clarifai = require('clarifai');
 const util = require('util');
 const im = require('imagemagick');
-
+//https://github.com/rsms/node-imagemagick
 
 class ImageUtility{
 

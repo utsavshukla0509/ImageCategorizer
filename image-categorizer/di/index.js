@@ -49,6 +49,7 @@ container.register('forgotUpdateApi', asClass(require("../controller/user/forgot
 //Image
 container.register('addImageApi', asClass(require("../controller/image/addImage"), getScope()));
 container.register('getImagesApi', asClass(require("../controller/image/getImages"), getScope()));
+container.register('getImagesByDateApi', asClass(require("../controller/image/getImagesByDate"), getScope()));
 
 //Label
 container.register('getLabelsApi', asClass(require("../controller/label/getLabels"), getScope()));
