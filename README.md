@@ -2,7 +2,7 @@
 ImageCat is a website for managing your Images, simplifying the task to sort through your Image Data.<br>
 
 
-## Table fo Contents
+## Table of Contents
 
 1. **[Front Page](#front)**<br>
 2. **[Signup/Login](#signuplogin)**<br>
